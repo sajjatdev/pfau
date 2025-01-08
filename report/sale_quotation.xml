@@ -164,36 +164,38 @@
                     </tbody>
                 </table>
                 <table class="table" style="border-bottom: 0.5px solid black !important;">
-                    <t t-set="discount_model" t-value="sum(line.discount for line in o.order_line)"/>
-                    <t t-esc="discount_model"/>  
+                    <t t-set="discount" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
+                    
+                    <t t-set="total_price" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
+                    
                     <tr>
                         <td style="padding:0px; margin:0px; border-top: 1px solid black; vertical-align: middle;">Summe netto</td>
                         <td class="text-right" style="padding:0px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
                             <span t-field="o.amount_untaxed"/>
                         </td>
                     </tr>
-                    <tr style="height: -2px;" t-if="discount_model">
+                    <tr style="height: -2px;">
                         <td style="padding:0px; margin:0px; vertical-align: middle;">Konditionen
                             <![CDATA[&nbsp;]]>
-                            <!-- <span t-field="discount_model"/>% -->
+                            <span t-esc="abs(discount)/total_price*100"/>%
                         </td>
-                        <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">-
-                            <span t-field="o.amount_undiscounted"/>
+                        <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
+                            <span t-esc="abs(discount)"/> €
                         </td>
                     </tr>
-                    <tr style="height: -2px;" t-if="o.amount_undiscounted">
+                    <!-- <tr style="height: -2px;" t-if="o.amount_undiscounted">
                         <td style="padding:0px; margin:0px; vertical-align: middle;">Zwischensumme</td>
                         <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
-                            <!-- <span t-field="o.after_discount"/> -->
+                             <span t-field="o.after_discount"/>
                             <span> €</span>
                         </td>
-                    </tr>
-                    <tr style="height: 2px;">
+                    </tr> 
+                     <tr style="height: 2px;">
                         <t t-if="o.amount_tax &gt; 0">
                             <td style="padding:0px; margin:0px; vertical-align: middle;">
-                                <!-- <t t-foreach="o.show_tax()" t-as="tax_show">
+                                 <t t-foreach="o.show_tax()" t-as="tax_show">
                                     <t t-esc="tax_show"/>
-                            </t> -->
+                            </t> 
                             </td>
                             <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
                                 <span t-field="o.amount_tax"/>
@@ -209,7 +211,7 @@
                                 <span t-field="o.amount_total"/>
                             </b>
                         </td>
-                    </tr>
+                    </tr> -->
                 </table>
             </div>
         </xpath>
