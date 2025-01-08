@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="attribute_inherit_pfau" model="ir.ui.view">
+            <field name="name">pfau.attribute.view.form.inherit</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.product_attribute_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_main_fields']//field[@name='name']" position="after">
+                    <field name="custom_attr_name" />
+                    <field name="attr_value" />
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

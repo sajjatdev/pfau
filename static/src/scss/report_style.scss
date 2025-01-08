@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'avantbook';
+    src: url('/pfau/static/src/fonts/Avant_Garde_Book_BT_0.ttf') format('truetype'); // Safari, Android, iOS
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'avantdemi';
+    src: url('/pfau/static/src/fonts/Avant_Garde_Demi_BT_0.ttf') format('truetype'); // Safari, Android, iOS
+    font-weight: normal;
+}
+
+.title{
+    font-size: 15px;
+    font-family: 'avantdemi' !important;
+}
+.title_source_div {
+    text-align: right;
+    margin-bottom: 10px;
+}
+.title_source{
+    font-size: 12px;
+    font-family: 'avantdemi' !important;
+}
+
+.logo-image {
+    position: relative;
+    transform: translateX(100px);
+}
+.note_block{
+    padding-top: 40px;
+}

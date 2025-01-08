@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_sale_form_view_pfau" model="ir.ui.view">
+            <field name="name">sale.order.pfau.view.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//page[@name='other_information']//group//group" position="after">
+                    <group string="Report" name="report_info">
+                        <field name="sale_subject" string="Subject For Quotation"/>
+                        <field name="cover_note_sale" string="Cover Note Quote" />
+                        <field name="delivery_term" />
+                        <field name="delivery_time" />
+                    </group>
+                </xpath>
+
+                  <xpath expr="//field[@name='product_template_id']" position="before">
+                    <field name="position"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
