@@ -183,19 +183,19 @@
                             <span t-esc="abs(discount)"/> €
                         </td>
                     </tr>
-                    <!-- <tr style="height: -2px;" t-if="o.amount_undiscounted">
+                    <tr style="height: -2px;" t-if="o.amount_undiscounted">
                         <td style="padding:0px; margin:0px; vertical-align: middle;">Zwischensumme</td>
                         <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
-                             <span t-field="o.after_discount"/>
-                            <span> €</span>
+                             <span t-esc="total_price"/> €
                         </td>
                     </tr> 
                      <tr style="height: 2px;">
                         <t t-if="o.amount_tax &gt; 0">
+                             <t t-set="taxes" t-value="o.show_tax()"/>
                             <td style="padding:0px; margin:0px; vertical-align: middle;">
-                                 <t t-foreach="o.show_tax()" t-as="tax_show">
-                                    <t t-esc="tax_show"/>
-                            </t> 
+                                <t t-foreach="taxes['tax_groups']" t-as="tax_des">
+                                    <span t-esc="tax_des"/>
+                                </t>
                             </td>
                             <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
                                 <span t-field="o.amount_tax"/>
@@ -211,7 +211,7 @@
                                 <span t-field="o.amount_total"/>
                             </b>
                         </td>
-                    </tr> -->
+                    </tr>
                 </table>
             </div>
         </xpath>
