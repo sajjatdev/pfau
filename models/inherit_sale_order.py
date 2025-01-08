@@ -29,11 +29,3 @@ class InheritSaleOrder(models.Model):
     delivery_time = fields.Text(
         string="Expected Delivery Weeks", default="5-7 Wochen ab Auftragsklarheit"
     )
-
-    def get_discounts(self):
-        for order in self:
-            # Retrieve all related discount records
-            discount_records = self.env["sale.order.discount"].search(
-                [("sale_order_id", "=", order.id)]
-            )
-            return discount_records

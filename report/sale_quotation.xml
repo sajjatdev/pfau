@@ -164,7 +164,8 @@
                     </tbody>
                 </table>
                 <table class="table" style="border-bottom: 0.5px solid black !important;">
-                    <t t-set="discount_model" t-value="o.get_discounts()"/>
+                    <t t-set="discount_model" t-value="sum(line.discount for line in o.order_line)"/>
+                    <t t-esc="discount_model"/>  
                     <tr>
                         <td style="padding:0px; margin:0px; border-top: 1px solid black; vertical-align: middle;">Summe netto</td>
                         <td class="text-right" style="padding:0px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
@@ -174,7 +175,7 @@
                     <tr style="height: -2px;" t-if="discount_model">
                         <td style="padding:0px; margin:0px; vertical-align: middle;">Konditionen
                             <![CDATA[&nbsp;]]>
-                            <span t-field="discount_model.discount_percentage"/>%
+                            <!-- <span t-field="discount_model"/>% -->
                         </td>
                         <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">-
                             <span t-field="o.amount_undiscounted"/>
@@ -190,9 +191,9 @@
                     <tr style="height: 2px;">
                         <t t-if="o.amount_tax &gt; 0">
                             <td style="padding:0px; margin:0px; vertical-align: middle;">
-                                <t t-foreach="o.show_tax()" t-as="tax_show">
+                                <!-- <t t-foreach="o.show_tax()" t-as="tax_show">
                                     <t t-esc="tax_show"/>
-                            </t>
+                            </t> -->
                             </td>
                             <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
                                 <span t-field="o.amount_tax"/>
