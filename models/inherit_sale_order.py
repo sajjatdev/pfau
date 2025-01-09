@@ -60,7 +60,7 @@ class InheritSaleOrder(models.Model):
         # Prepare tax groups summary
         tax_summary = []
         for rate, data in tax_groups.items():
-            tax_summary.append(f"{data['description']} {data['tax_amount']} €  ")
+            tax_summary.append(f"{data['description']}: {data['tax_amount']} €  ")
 
         # Return a summary of taxes and total price
         return {"tax_groups": tax_summary, "total_price": total_price}

@@ -163,14 +163,13 @@
                         </t>
                     </tbody>
                 </table>
+            
                 <table class="table" style="border-bottom: 0.5px solid black !important;">
                     <t t-set="discount" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
-                    
                     <t t-set="total_price" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
-                    
                     <tr>
                         <td style="padding:0px; margin:0px; border-top: 1px solid black; vertical-align: middle;">Summe netto</td>
-                        <td class="text-right" style="padding:0px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
+                        <td class="text-end" style="padding:0px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
                             <span t-field="o.amount_untaxed"/>
                         </td>
                     </tr>
@@ -179,13 +178,13 @@
                             <![CDATA[&nbsp;]]>
                             <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
                         </td>
-                        <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
+                        <td class="text-end" style="padding:0px; margin:0px; vertical-align: middle;">
                             <span t-esc="abs(discount)"/> €
                         </td>
                     </tr>
                     <tr style="height: -2px;" t-if="o.amount_undiscounted">
                         <td style="padding:0px; margin:0px; vertical-align: middle;">Zwischensumme</td>
-                        <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
+                        <td class="text-end" style="padding:0px; margin:0px; vertical-align: middle;">
                              <span t-esc="total_price"/> €
                         </td>
                     </tr> 
@@ -197,7 +196,7 @@
                                     <span t-esc="tax_des"/>
                                 </t>
                             </td>
-                            <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;">
+                            <td class="text-end" style="padding:0px; margin:0px; vertical-align: middle;">
                                 <span t-field="o.amount_tax"/>
                             </td>
                         </t>
@@ -206,7 +205,7 @@
                         <td style="padding:0px; margin:0px; vertical-align: middle;" width="10">
                             <b>Gesamtsumme</b>
                         </td>
-                        <td class="text-right" style="padding:0px; margin:0px; vertical-align: middle;" width="10">
+                        <td class="text-end" style="padding:0px; margin:0px; vertical-align: middle;" width="10">
                             <b>
                                 <span t-field="o.amount_total"/>
                             </b>
