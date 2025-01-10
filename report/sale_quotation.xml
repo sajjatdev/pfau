@@ -163,7 +163,6 @@
                         </t>
                     </tbody>
                 </table>
-            
                 <table class="table" style="border-bottom: 0.5px solid black !important;">
                     <t t-set="discount" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                     <t t-set="total_price" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
@@ -185,12 +184,12 @@
                     <tr style="height: -2px;" t-if="o.amount_undiscounted">
                         <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">Zwischensumme</td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                             <span t-esc="total_price"/> €
+                            <span t-esc="total_price"/> €
                         </td>
-                    </tr> 
-                     <tr style="height: 2px;">
+                    </tr>
+                    <tr style="height: 2px;">
                         <t t-if="o.amount_tax &gt; 0">
-                             <t t-set="taxes" t-value="o.show_tax()"/>
+                            <t t-set="taxes" t-value="o.show_tax()"/>
                             <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
                                 <t t-foreach="taxes['tax_groups']" t-as="tax_des">
                                     <span t-esc="tax_des"/>
@@ -214,12 +213,60 @@
                 </table>
                 <br/>
                 <div style="text-align:justify;">
-                <p>Etwaige Produktbilder sind eine Abbildung des offerierten Modells, aber nicht unbedingt der gewählten Ausführung. 
+                    <p>Etwaige Produktbilder sind eine Abbildung des offerierten Modells, aber nicht unbedingt der gewählten Ausführung. 
                     Preise verstehen sich in Euro, pro Stück exklusive Mehrwertsteuer, gültig für die angebotene Stückzahl</p>
-                </div><br/>
-              <div class="col-md-12" name="total" style="margin-right:100px;"/>
-              <div class="clearfix"/>
-              
+                </div>
+                <br/>
+                <div class="col-md-12" name="total" style="margin-right:100px;"/>
+                <div class="clearfix"/>
+                 <div class="row pb-2">
+                    <div class="col-2">
+                        <p>
+                            <strong style="padding-right:30px;">Lieferung:</strong>
+                        </p>
+                    </div>
+                    <div class="col-10">
+                      <p>
+                         <t t-esc="o.user_id.name"/>
+                      </p>
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col-2">
+                        <p>
+                            <strong style="padding-right:30px;">Lieferzeit:</strong>
+                        </p>
+                    </div>
+                    <div class="col-10">
+                      <p>
+                       <t t-esc="o.delivery_time"/>, Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete Lieferungen können wir nicht verantwortlich gemacht werden.
+                      </p>
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col-2">
+                        <p>
+                            <strong style="padding-right:30px;">Zahlungsziel:</strong>
+                        </p>
+                    </div>
+                    <div class="col-10">
+                      <p>
+                        <t t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/> Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet.Die Ware bleibt bis zur vollständigen Bezahlung in unserem Eigentum.
+                      </p>
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col-2">
+                        <p>
+                            <strong style="padding-right:30px;">Gültigkeit:</strong>
+                        </p>
+                    </div>
+                    <div class="col-10">
+                      <p>
+                        Das Angebot ist gültig bis <t t-if="o.validity_date" t-esc="o.validity_date"/> 
+                      </p>
+                    </div>
+                </div>
             </div>
         </xpath>
     </template>
