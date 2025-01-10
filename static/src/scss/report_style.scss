@@ -9,7 +9,11 @@
     src: url('/pfau/static/src/fonts/Avant_Garde_Demi_BT_0.ttf') format('truetype'); // Safari, Android, iOS
     font-weight: normal;
 }
-
+.quotation-page{
+    padding-left: 55px;
+    padding-right: 20px;
+    font-size: 11px;
+}
 .title{
     font-size: 15px;
     font-family: 'avantdemi' !important;
@@ -23,9 +27,11 @@
     font-family: 'avantdemi' !important;
 }
 
-.logo-image {
-    position: relative;
-    transform: translateX(100px);
+.header-logo-image {
+    margin-top: 50mm;
+    text-align: center;
+    margin-left: 55rem;  
+    z-index: 1000;
 }
 .note_block{
     padding-top: 40px;
