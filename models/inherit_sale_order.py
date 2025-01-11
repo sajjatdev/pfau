@@ -21,12 +21,19 @@ class InheritSaleOrder(models.Model):
         default="Wir danken für die Einladung zur Anbotslegung und bieten unter Berücksichtigung unserer Verkaufsbedingungen an:",
     )
 
-    delivery_term = fields.Text(
+    delivery_term_quot = fields.Text(
+        string="Delivery Terms",
+        default="Frei Haus Wien, inkl. Vertragen, Montage und Entsorgen des Verpackungsmaterials",
+    )
+    delivery_term_sale = fields.Text(
         string="Delivery Terms",
         default="Frei Haus Wien, inkl. Vertragen, Montage und Entsorgen des Verpackungsmaterials",
     )
 
-    delivery_time = fields.Text(
+    delivery_time_quot = fields.Text(
+        string="Expected Delivery Weeks", default="5-7 Wochen ab Auftragsklarheit"
+    )
+    delivery_time_sale = fields.Text(
         string="Expected Delivery Weeks", default="5-7 Wochen ab Auftragsklarheit"
     )
 
@@ -60,7 +67,7 @@ class InheritSaleOrder(models.Model):
         # Prepare tax groups summary
         tax_summary = []
         for rate, data in tax_groups.items():
-            tax_summary.append(f"{data['description']}: {data['tax_amount']} €, ")
+            tax_summary.append(f"{data['description']} Mwst. ")
 
         # Return a summary of taxes and total price
         return {"tax_groups": tax_summary, "total_price": total_price}

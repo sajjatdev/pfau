@@ -3,9 +3,9 @@
     <template id="inherit_sale_quotations" name="template_name" inherit_id="l10n_din5008.external_layout_din5008">
         <!-- logo position change -->
         <xpath expr="//table[contains(@class,'company_header')]" position="replace">
-             <div>
-               <img class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}"  height="110px" width="90px" />
-             </div>
+            <div>
+                <img class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}"  height="110px" width="90px" />
+            </div>
         </xpath>
         <!--customer information block -->
         <xpath expr="//div[contains(@t-attf-class, 'din_page invoice_note')]" position="replace">
@@ -122,19 +122,19 @@
                 <table class="table table-sm o_main_table table-borderless">
                     <thead style="border-bottom: 0.5px solid black;">
                         <tr>
-                            <th style="width:100px; border-top: 0px solid white !important;border-bottom: 1px solid black;">Position</th>
-                            <th style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Produkt</th>
-                            <th style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Imagen</th>
-                            <th class="text-right" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Preis/Stück</th>
-                            <th class="text-right" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Stück</th>
-                            <th class="text-right" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Disc.</th>
-                            <th class="text-right" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Summe</th>
+                            <th class="text-start"  style="width:100px; border-top: 0px solid white !important;border-bottom: 1px solid black; width:50px;">Position</th>
+                            <th class="text-start" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Produkt</th>
+                            <th class="text-start" style="border-top: 0px solid white !important;border-bottom: 1px solid black;"></th>
+                            <th class="text-start" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Preis/Stück</th>
+                            <th class="text-start" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Stück</th>
+                            <th class="text-start" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Disc.</th>
+                            <th class="text-start" style="border-top: 0px solid white !important;border-bottom: 1px solid black;">Summe</th>
                         </tr>
                     </thead>
                     <tbody class="sale_tbody">
                         <t t-set="current_subtotal" t-value="0"/>
                         <t t-foreach="o.order_line" t-as="line">
-                            <tr>
+                            <tr style="border-bottom: 0.5px solid #dcdcdc;">
                                 <td style="vertical-align: middle;">
                                     <strong>
                                         <span t-field="line.position"/>
@@ -162,6 +162,8 @@
                         </t>
                     </tbody>
                 </table>
+                <br/>
+                <br/>
                 <table class="table" style="border-bottom: 0.5px solid black !important;">
                     <t t-set="discount" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                     <t t-set="total_price" t-value="sum(line.price_subtotal for line in o.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
@@ -218,28 +220,42 @@
                 <br/>
                 <div class="col-md-12" name="total" style="margin-right:100px;"/>
                 <div class="clearfix"/>
-                 <div class="row pb-2">
+                <div class="row pb-2">
                     <div class="col-2">
                         <p>
                             <strong style="padding-right:30px;">Lieferung:</strong>
                         </p>
                     </div>
                     <div class="col-10">
-                      <p>
-                         <t t-esc="o.delivery_term"/>
-                      </p>
+                        <p>
+                            <t t-if="o.state in ['draft','sent']">
+                                <t t-esc="o.delivery_term_quot"/>
+                        </t>
+                            <t t-else="">
+                                <t t-esc="o.delivery_term_sale"/>
+                        </t>
+                        </p>
                     </div>
                 </div>
-                <div class="row pb-2">
+                <div  class="row pb-2">
                     <div class="col-2">
                         <p>
                             <strong style="padding-right:30px;">Lieferzeit:</strong>
                         </p>
                     </div>
                     <div class="col-10">
-                      <p>
-                       <t t-esc="o.delivery_time"/>, Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete Lieferungen können wir nicht verantwortlich gemacht werden.
-                      </p>
+                        <p>
+                            <t t-if="o.state in ['draft','sent']">
+                                <t t-esc="o.delivery_time_quot"/>, Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete Lieferungen können wir nicht verantwortlich gemacht werden.
+                      </t>
+                            <t t-else="">
+                                <t t-esc="o.delivery_time_sale"/> ,jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete
+                            Lieferungen können wir nicht verantwortlich gemacht werden. Sobald die Ware in unserem Lager eingetroffen ist, werden
+                            wir uns umgehend mit lhnen in Verbindung setzten, um einen Liefer/Auftragsklarheit zu vereinbaren. Die Lieferzeit beginnt
+                            mit Auftragsklarheit und dem Eintreffen einer vereinbarten Anzahlung. Bei Selbtabholung ist die bestellte Ware innerhalb
+                            von 7 Tagen von unserem Lager abzuholen. Bei verspäteter Abholung fallen Lagerkosten von €6,00 inkl. Mwst. pro Tag an.
+                      </t>
+                        </p>
                     </div>
                 </div>
                 <div class="row pb-2">
@@ -249,22 +265,88 @@
                         </p>
                     </div>
                     <div class="col-10">
-                      <p>
-                        <t t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/> Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet.Die Ware bleibt bis zur vollständigen Bezahlung in unserem Eigentum.
-                      </p>
+                        <p>
+                            <t t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/> Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet.Die Ware bleibt bis zur vollständigen Bezahlung in unserem Eigentum.
+                        </p>
                     </div>
                 </div>
-                <div class="row pb-2">
+                <div t-if="o.state in ['draft','sent']" class="row pb-2">
                     <div class="col-2">
                         <p>
                             <strong style="padding-right:30px;">Gültigkeit:</strong>
                         </p>
                     </div>
                     <div class="col-10">
-                      <p>
-                        Das Angebot ist gültig bis <t t-if="o.validity_date" t-esc="o.validity_date"/> 
-                      </p>
+                        <p>
+                        Das Angebot ist gültig bis
+                            <t t-if="o.validity_date" t-esc="o.validity_date"/>
+                        </p>
                     </div>
+                </div>
+                <br/>
+                <div t-if="o.state not in ['draft','sent']" class="row">
+                    <div class="col-6">
+                        <p>
+                            <strong>
+                                <u>Lieferadresse</u>
+                            </strong>
+                        </p>
+                        <div>
+                            <p>
+                                <span style="display:block;">
+                                    <span t-field="o.partner_shipping_id.parent_id.name" />,</span>
+                                <span t-field="o.partner_shipping_id.name" style="display:block;"/>
+                                <div t-field="o.partner_shipping_id"
+                                t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            <strong>
+                                <u>Rechungsadresse</u>
+                            </strong>
+                        </p>
+                        <div>
+                       <p>
+                            <span style="display:block;">
+                            <span t-field="o.partner_invoice_id.parent_id.name"/>,</span>
+                            <span t-field="o.partner_invoice_id.name" style="display:block;"/>
+                            <div t-field="o.partner_invoice_id"
+                            t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                       </p>
+                     </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div>
+                    <t t-if="o.state in ['draft','sent']">
+                        <p>
+                        Für alle Lieferungen gelten unsere Allgemeinen Geschäftsbedingungen, hinterlegt unter agb.pfau1010.com. Wir hoffen,
+                        dass unser Angebot Ihren Vorstellungen entspricht. Sie erreichen uns innerhalb unserer Geschäftszeiten unter 01 535 40
+                        75 oder auch per email office@pfau1010.com.
+                        </p>
+                    </t>
+                    <t t-else="">
+                        <p>
+                        Wir bitten um Bestätigung der Auftragsbestätigung zu den vereinbarten Bedingungen und Retournierung.<br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        
+
+                        --------------------------------------------------------------------<br/>
+                        Datum, Name and Unterschrift
+                        </p>
+                    </t>
+                </div>
+                <br/>
+                <br/>
+                <div>
+                    <t t-esc="o.user_id.name"/>
                 </div>
             </div>
         </xpath>

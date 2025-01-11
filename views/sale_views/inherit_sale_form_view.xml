@@ -10,8 +10,8 @@
                     <group string="Report" name="report_info">
                         <field name="sale_subject" string="Subject For Quotation"/>
                         <field name="cover_note_sale" string="Cover Note Quote" />
-                        <field name="delivery_term" />
-                        <field name="delivery_time" />
+                        <field name="delivery_term_quot" />
+                        <field name="delivery_time_quot" />
                     </group>
                 </xpath>
 
