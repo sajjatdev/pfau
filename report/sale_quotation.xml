@@ -3,13 +3,13 @@
     <template id="inherit_sale_quotations" name="template_name" inherit_id="l10n_din5008.external_layout_din5008">
         <!-- logo position change -->
         <xpath expr="//table[contains(@class,'company_header')]" position="replace">
-            <div>
-                <img class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}"  height="110px" width="90px" />
+            <div t-if="doc">
+                <img  class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}"  height="110px" width="90px" />
             </div>
         </xpath>
         <!--customer information block -->
         <xpath expr="//div[contains(@t-attf-class, 'din_page invoice_note')]" position="replace">
-            <div t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
+            <div t-if="o" t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
                      t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
                      t-att-data-oe-model="o and o._name"
                      t-att-data-oe-id="o and o.id">
@@ -308,14 +308,14 @@
                             </strong>
                         </p>
                         <div>
-                       <p>
-                            <span style="display:block;">
-                            <span t-field="o.partner_invoice_id.parent_id.name"/>,</span>
-                            <span t-field="o.partner_invoice_id.name" style="display:block;"/>
-                            <div t-field="o.partner_invoice_id"
+                            <p>
+                                <span style="display:block;">
+                                    <span t-field="o.partner_invoice_id.parent_id.name"/>,</span>
+                                <span t-field="o.partner_invoice_id.name" style="display:block;"/>
+                                <div t-field="o.partner_invoice_id"
                             t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
-                       </p>
-                     </div>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <br/>
@@ -330,15 +330,17 @@
                     </t>
                     <t t-else="">
                         <p>
-                        Wir bitten um Bestätigung der Auftragsbestätigung zu den vereinbarten Bedingungen und Retournierung.<br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
+                        Wir bitten um Bestätigung der Auftragsbestätigung zu den vereinbarten Bedingungen und Retournierung.
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                         
 
-                        --------------------------------------------------------------------<br/>
+                        --------------------------------------------------------------------
+                            <br/>
                         Datum, Name and Unterschrift
                         </p>
                     </t>
@@ -347,6 +349,13 @@
                 <br/>
                 <div>
                     <t t-esc="o.user_id.name"/>
+                </div>
+                <div class="footer" >
+                    <div class="text-center">
+                    <p class="footer-size">PFAU OG, GESELLSCHAFT FÜR OBJEKTEINRICHTUNG UND INNENRAUMGESTALTUNG, AM GESTADE, 1010 WIEN
+                    TELEFON: +43 -1- 535 40 75, FAX DW 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, UID-NR. ATU 10249006, FN 9447v HG WIEN
+                    RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NR.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW</p>
+                    </div>
                 </div>
             </div>
         </xpath>
