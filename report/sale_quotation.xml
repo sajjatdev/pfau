@@ -135,12 +135,12 @@
                         <t t-set="current_subtotal" t-value="0"/>
                         <t t-foreach="o.order_line" t-as="line">
                             <tr style="border-bottom: 0.5px solid #dcdcdc;">
-                                <td style="vertical-align: middle;">
+                                <td style="vertical-align: top;">
                                     <strong>
                                         <span t-field="line.position"/>
                                     </strong>
                                 </td>
-                                <td style="vertical-align: middle;">
+                                <td style="vertical-align: top;">
                                     <span t-field="line.name"/>
                                 </td>
                                 <td style="vertical-align: middle;">
