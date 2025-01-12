@@ -1,0 +1,144 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pfau
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-12 14:59+0000\n"
+"PO-Revision-Date: 2025-01-12 14:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+", Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und "
+"rechtzeitig beliefert werden. Für verspätete Lieferungen können wir nicht "
+"verantwortlich gemacht werden."
+msgstr ", Each delivery is subject to us being properly and timely supplied ourselves. We cannot be held responsible for delayed deliveries."
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+",jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete\n"
+"                            Lieferungen können wir nicht verantwortlich gemacht werden. Sobald die Ware in unserem Lager eingetroffen ist, werden\n"
+"                            wir uns umgehend mit lhnen in Verbindung setzten, um einen Liefer/Auftragsklarheit zu vereinbaren. Die Lieferzeit beginnt\n"
+"                            mit Auftragsklarheit und dem Eintreffen einer vereinbarten Anzahlung. Bei Selbtabholung ist die bestellte Ware innerhalb\n"
+"                            von 7 Tagen von unserem Lager abzuholen. Bei verspäteter Abholung fallen Lagerkosten von €6,00 inkl. Mwst. pro Tag an."
+msgstr ""
+", Each delivery is subject to us being properly and timely supplied ourselves. We cannot be held responsible for delayed\n"
+"                            deliveries. Once the goods have arrived at our warehouse, we will contact you immediately to arrange delivery/order clarification.\n"
+"                            The delivery time begins with order clarification and receipt of an agreed advance payment. For self-collection, the ordered goods\n"
+"                            must be collected from our warehouse within 7 days. For delayed collection, storage costs of €6.00 including VAT per day will apply."
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "<b>Gesamtsumme</b>"
+msgstr "<b>Total</b>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "<strong style=\"padding-right:30px;\">Gültigkeit:</strong>"
+msgstr "<strong style=\"padding-right:30px;\">Validity:</strong>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "<strong style=\"padding-right:30px;\">Lieferung:</strong>"
+msgstr "<strong style=\"padding-right:30px;\">Delivery:</strong>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "<strong style=\"padding-right:30px;\">Lieferzeit:</strong>"
+msgstr "<strong style=\"padding-right:30px;\">Delivery Time:</strong>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "<strong style=\"padding-right:30px;\">Zahlungsziel:</strong>"
+msgstr "<strong style=\"padding-right:30px;\">Payment Terms:</strong>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+"<strong>\n"
+"                                <u>Lieferadresse</u>\n"
+"                            </strong>"
+msgstr "<strong>\n<u>Delivery Address</u>\n</strong>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+"<strong>\n"
+"                                <u>Rechungsadresse</u>\n"
+"                            </strong>"
+msgstr "<strong>\n<u>Billing Address</u>\n</strong>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+"AUFTRAGSBESTÄTIGUNG\n"
+"                            <br/>N .:"
+msgstr "ORDER CONFIRMATION\n<br/>No.:"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+"Ansprechpartner\n"
+"                                    <br/>"
+msgstr "Contact Person\n<br/>"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_product_attribute_value
+msgid "Attribute Value"
+msgstr "Attribute Value"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+"Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet.Die Ware bleibt "
+"bis zur vollständigen Bezahlung in unserem Eigentum."
+msgstr "A 1.5% monthly fee will be charged for overdue payments. The goods remain our property until fully paid."
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_sale_order__cover_note_quot
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Cover Note Quotation"
+msgstr "Cover Note Quotation"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_sale_order__cover_note_sale
+msgid "Cover Note Sale"
+msgstr "Cover Note Sale"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Cover Note Sale Order"
+msgstr "Cover Note Sale Order"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_product_attribute__custom_attr_name
+msgid "Custom Attribute Name"
+msgstr "Custom Attribute Name"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Das Angebot ist gültig bis"
+msgstr "The offer is valid until"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+"Datum\n"
+"                                    <br/>"
+msgstr "Date\n<br/>"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Delivery Term Quotation"
+msgstr "Delivery Term Quotation"
+
