@@ -37,6 +37,11 @@ class InheritSaleOrder(models.Model):
         string="Expected Delivery Weeks", default="5-7 Wochen ab Auftragsklarheit"
     )
 
+    def state_status(self):
+        for record in self:
+            pass
+        return False
+
     def show_tax(self):
         # Dictionary to group taxes by percentage
         tax_groups = {}

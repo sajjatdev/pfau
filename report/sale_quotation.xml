@@ -24,8 +24,8 @@
                     </strong>
                 </div>
                 <div class="row information_block">
-                    <div class="col-5">
-                        <strong class="title">
+                    <div class="col-5 title">
+                        <strong >
                             <t t-if="o.partner_id">
                                 <span t-field="o.partner_id.name"/>
                             </t>
@@ -141,7 +141,11 @@
                                     </strong>
                                 </td>
                                 <td style="vertical-align: top;">
-                                    <span t-field="line.name"/>
+                                        <span t-field="line.product_id.name"/><br/>
+                                        <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="attribute">
+                                            <span t-field="attribute.display_name"/><br/>
+                                        </t>
+                                      
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <img t-if="line.product_id.image_1920" t-att-src="image_data_uri(line.product_id.image_1920)" width="50px" height="50px" />

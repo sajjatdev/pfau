@@ -8,10 +8,14 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook//page[@name='other_information']//group//group" position="after">
                     <group string="Report" name="report_info">
-                        <field name="sale_subject" string="Subject For Quotation"/>
-                        <field name="cover_note_sale" string="Cover Note Quote" />
-                        <field name="delivery_term_quot" />
-                        <field name="delivery_time_quot" />
+                        <field name="sale_subject" string="Subject For Quotation" invisible="state not in ('draft','sent')" />
+                        <field name="sale_order_subject" string="Subject For Sale Order" invisible="state in ('draft','sent')"  />
+                        <field name="cover_note_sale" string="Cover Note Sale Order" invisible="state in ('draft','sent')"  />
+                        <field name="cover_note_quot" string="Cover Note Quotation" invisible="state not in ('draft','sent')"  />
+                        <field name="delivery_term_quot" string="Delivery Term Quotation"  invisible="state not in ('draft','sent')" />
+                        <field name="delivery_time_quot" string="Delivery Weeks Quotation" invisible="state not in ('draft','sent')" />
+                        <field name="delivery_term_sale" string="Delivery Term Sale Order" invisible="state  in ('draft','sent')" />
+                        <field name="delivery_time_sale" string="Delivery Weeks Sale Order" invisible="state in ('draft','sent')" />
                     </group>
                 </xpath>
 
