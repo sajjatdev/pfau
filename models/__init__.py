@@ -2,3 +2,4 @@ from . import inherit_product_attribute
 from . import inherit_sale_order
 from . import inherit_sale_order_line
 from . import inherit_partner
+from . import inherit_stock_rule

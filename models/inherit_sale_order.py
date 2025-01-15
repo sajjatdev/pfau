@@ -76,3 +76,5 @@ class InheritSaleOrder(models.Model):
 
         # Return a summary of taxes and total price
         return {"tax_groups": tax_summary, "total_price": total_price}
+
+
