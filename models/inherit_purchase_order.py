@@ -1,46 +1,8 @@
-from odoo import api,fields,models
+from odoo import  api,fields,models
 
-class InheritSaleOrder(models.Model):
-    _inherit = "sale.order"
+class InheritPurchaseOrder(models.Model):
+    _inherit = 'purchase.order'
 
-    sale_subject = fields.Text(
-        string="Sale Default Subject For Quotation",
-    )
-
-    sale_order_subject = fields.Text(
-        string="Sale Default Subject For Quotation",
-    )
-
-    cover_note_sale = fields.Text(
-        string="Cover Note Sale",
-        default="Wir danken für die Einladung zur Anbotslegung und bieten unter Berücksichtigung unserer Verkaufsbedingungen an:",
-    )
-
-    cover_note_quot = fields.Text(
-        string="Cover Note Quotation",
-        default="Wir danken für die Einladung zur Anbotslegung und bieten unter Berücksichtigung unserer Verkaufsbedingungen an:",
-    )
-
-    delivery_term_quot = fields.Text(
-        string="Delivery Terms",
-        default="Frei Haus Wien, inkl. Vertragen, Montage und Entsorgen des Verpackungsmaterials",
-    )
-    delivery_term_sale = fields.Text(
-        string="Delivery Terms",
-        default="Frei Haus Wien, inkl. Vertragen, Montage und Entsorgen des Verpackungsmaterials",
-    )
-
-    delivery_time_quot = fields.Text(
-        string="Expected Delivery Weeks", default="5-7 Wochen ab Auftragsklarheit"
-    )
-    delivery_time_sale = fields.Text(
-        string="Expected Delivery Weeks", default="5-7 Wochen ab Auftragsklarheit"
-    )
-
-    def state_status(self):
-        for record in self:
-            pass
-        return False
 
     def is_discount(self):
         status = False
@@ -83,5 +45,3 @@ class InheritSaleOrder(models.Model):
 
         # Return a summary of taxes and total price
         return {"tax_groups": tax_summary, "total_price": total_price}
-
-

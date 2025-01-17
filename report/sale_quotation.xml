@@ -4,36 +4,50 @@
         <!-- logo position change -->
         <xpath expr="//table[contains(@class,'company_header')]" position="replace">
             <div t-if="doc">
-                <img  class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}"  height="110px" width="90px" />
+                <img class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}" height="110px"
+                     width="90px"/>
             </div>
         </xpath>
         <!--customer information block -->
         <xpath expr="//div[contains(@t-attf-class, 'din_page invoice_note')]" position="replace">
             <t t-set="doc" t-value="o.with_context({'lang':o.partner_id.lang})"/>
             <t t-set="lang" t-value="o.partner_id.lang"/>
-            <div t-if="doc" t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
-                     t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
-                     t-att-data-oe-model="doc and doc._name"
-                     t-att-data-oe-id="doc and doc.id">
+
+            <div
+                    t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
+                    t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+                    t-att-data-oe-model="doc and doc._name"
+                    t-att-data-oe-id="doc and doc.id">
                 <div class="title_source_div">
+
                     <strong class="title_source">
                         <span t-if="doc.state not in ['draft', 'sent']">
                             <t t-if="lang=='en_US'">ORDER CONFIRMATION</t>
                             <t t-if="lang!='en_US'">AUFTRAGSBESTÄTIGUNG</t>
                             <br/>N .:
                             <span t-field="o.name"/>
+
                         </span>
                         <span t-if="doc.state in ['draft', 'sent']">
-                            <t t-if="lang=='en_US'">QUOTATION</t>
-                            <t t-if="lang!='en_US'">OFFERT</t>
+                            <t t-if="lang=='en_US'">
+                                <t t-if="'P' not in doc.name">QUOTATION</t>
+                                <t t-if="'P' in doc.name">PURCHASE ORDER</t>
+                            </t>
+                            <t t-if="lang!='en_US'">
+                                <t t-if="'P' not in doc.name">OFFERT</t>
+                                <t t-if="'P' not in doc.name">AUFTRAGSBESTÄTIGUNG</t>
+                            </t>
                             <br/>N .:
                             <span t-field="doc.name"/>
+
                         </span>
                     </strong>
+
+
                 </div>
                 <div class="row information_block">
                     <div class="col-5 title">
-                        <strong >
+                        <strong>
                             <t t-if="doc.partner_id">
                                 <span t-field="doc.partner_id.name"/>
                             </t>
@@ -47,7 +61,7 @@
                         <br/>
                         <span t-field="doc.partner_id.country_id"/>
                     </div>
-                    <div class="col-7">
+                    <div t-if="'P' not in doc.name" class="col-7">
                         <div class="row">
                             <!-- Right-aligned column -->
                             <div class="col-4 text-start">
@@ -111,29 +125,55 @@
                                 </span>
                                 <span t-if="doc.user_id.email">
                                     <span t-field="doc.user_id.email"/>
-                            </span>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Notes -->
-                <div class="note_block">
+                <div t-if="'P' not in doc.name" class="note_block">
                     <t t-if="doc.state in ['draft','sent']">
                         <b>
-                            <span style="line-height: 250%; " t-field="doc.sale_subject"/>
+                            <span style="line-height: 250%; " t-if="'sale_subject' in doc" t-field="doc.sale_subject"/>
                         </b>
                         <br/>
-                        <span style="line-height: 200%; " t-field="doc.cover_note_quot"/>
+                        <span style="line-height: 200%; " t-if="'cover_note_quot' in doc"
+                              t-field="doc.cover_note_quot"/>
                         <br/>
                     </t>
                     <t t-if="o.state not in ['draft','sent']">
                         <b>
-                            <span style="line-height: 200%; " t-field="doc.sale_order_subject"/>
+                            <span style="line-height: 200%; " t-if="'sale_order_subject' in doc"
+                                  t-field="doc.sale_order_subject"/>
                         </b>
                         <br/>
-                        <span style="line-height: 200%; " t-field="doc.cover_note_sale"/>
+                        <span style="line-height: 200%; " t-if="'cover_note_sale' in doc"
+                              t-field="doc.cover_note_sale"/>
                         <br/>
                     </t>
+                </div>
+                <div t-if="'P' in doc.name" class="row">
+
+                    <div class="col-3">
+                        <span>
+                            <strong>
+                                <span t-if="lang == 'en_US'">Our Order Reference</span>
+                                <span t-if="lang!='en_US'">Unsere Bestellreferenz</span>
+                            </strong>
+                            <br/>
+                            <span t-esc="doc.name"/>
+                        </span>
+                    </div>
+                    <div class="col-3">
+                        <span>
+                            <strong>
+                                <span t-if="lang == 'en_US'">Order Date</span>
+                                <span t-if="lang!='en_US'">Bestelldatumz</span>
+                            </strong>
+                            <br/>
+                            <span t-field="doc.date_order" t-options="{'widget':'date'}"/>
+                        </span>
+                    </div>
                 </div>
                 <br/>
                 <br/>
@@ -141,29 +181,36 @@
                 <table class="table table-sm o_main_table table-borderless">
                     <thead style="border-bottom: 0.5px solid black;">
                         <tr>
-                            <th class="text-start" style="width:100px; border-top: 0px solid white !important; border-bottom: 1px solid black; width:50px;">
+                            <th t-if="'P' not in doc.name" class="text-start"
+                                style="width:100px; border-top: 0px solid white !important; border-bottom: 1px solid black; width:50px;">
                                 <t t-if="lang=='en_US'">Position</t>
                                 <t t-if="lang!='en_US'">Position</t>
                                 <!-- Same in both languages -->
                             </th>
-                            <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                 <t t-if="lang=='en_US'">Product</t>
                                 <t t-if="lang!='en_US'">Produkt</t>
                             </th>
-                            <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;"/>
-                            <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;"/>
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                 <t t-if="lang=='en_US'">Price/Unit</t>
                                 <t t-if="lang!='en_US'">Preis/Stück</t>
                             </th>
-                            <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                 <t t-if="lang=='en_US'">Quantity</t>
                                 <t t-if="lang!='en_US'">Stück</t>
                             </th>
-                            <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                            <th t-if="doc.is_discount()" class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                 <t t-if="lang=='en_US'">Disc.</t>
                                 <t t-if="lang!='en_US'">Disc.</t>
                             </th>
-                            <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                 <t t-if="lang=='en_US'">Total</t>
                                 <t t-if="lang!='en_US'">Summe</t>
                             </th>
@@ -173,21 +220,24 @@
                         <t t-set="current_subtotal" t-value="0"/>
                         <t t-foreach="doc.order_line" t-as="line">
                             <tr t-if="line.price_unit &gt;= 0 " style="border-bottom: 0.5px solid #dcdcdc;">
-                                <td style="vertical-align: top;">
+                                <td t-if="'P' not in doc.name" style="vertical-align: top;">
                                     <strong>
-                                        <span t-field="line.position"/>
+                                        <span t-if="'position' in line" t-field="line.position"/>
                                     </strong>
                                 </td>
                                 <td style="vertical-align: top;">
                                     <span t-field="line.product_id.name"/>
                                     <br/>
-                                    <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="attribute">
+                                    <t t-foreach="line.product_id.product_template_attribute_value_ids"
+                                       t-as="attribute">
                                         <span t-field="attribute.display_name"/>
                                         <br/>
                                     </t>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <img t-if="line.product_id.image_1920" t-att-src="image_data_uri(line.product_id.image_1920)" width="50px" height="50px" />
+                                    <img t-if="line.product_id.image_1920"
+                                         t-att-src="image_data_uri(line.product_id.image_1920)" width="50px"
+                                         height="50px"/>
                                 </td>
                                 <td class="text-center" style="text-align: center; vertical-align: middle;">
                                     <span t-field="line.price_unit"/>
@@ -195,7 +245,7 @@
                                 <td class="text-center" style="vertical-align: middle;">
                                     <t t-esc="int(line.product_uom_qty)"/>
                                 </td>
-                                <td class="text-center" style="vertical-align: middle;">
+                                <td t-if="doc.is_discount()" class="text-center" style="vertical-align: middle;">
                                     <span t-field="line.discount"/>%
                                 </td>
                                 <td class="text-center" style="vertical-align: middle;">
@@ -208,14 +258,17 @@
                 <br/>
                 <br/>
                 <table class="table" style="border-bottom: 0.5px solid black !important;">
-                    <t t-set="discount" t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
-                    <t t-set="total_price" t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
+                    <t t-set="discount"
+                       t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
+                    <t t-set="total_price"
+                       t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
                     <tr>
                         <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
                             <t t-if="lang=='en_US'">Net Total</t>
                             <t t-if="lang!='en_US'">Summe netto</t>
                         </td>
-                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; border-top: 1px solid black; vertical-align: middle;">
+                        <td class="text-end"
+                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid black; vertical-align: middle;">
                             <span t-esc="total_price"/>
                         </td>
                     </tr>
@@ -227,7 +280,8 @@
                             <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
                         </td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                            <span t-esc="round(discount,2)"/> €
+                            <span t-esc="round(discount,2)"/>
+                            €
                         </td>
                     </tr>
                     <tr t-if="discount!=0" style="height: -2px;">
@@ -236,19 +290,29 @@
                             <t t-if="lang!='en_US'">Zwischensumme</t>
                         </td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                            <span t-esc="doc.amount_untaxed"/> €
+                            <span t-esc="doc.amount_untaxed"/>
+                            €
                         </td>
                     </tr>
                     <tr style="height: 2px;">
                         <t t-if="doc.amount_tax &gt; 0">
-                            <t t-set="taxes" t-value="doc.show_tax()"/>
+
                             <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
-                                <t t-foreach="taxes['tax_groups']" t-as="tax_des">
-                                    <span t-esc="tax_des"/>
-                                </t>
+                                <div t-if="'P' not in doc.name">
+                                    <t t-set="taxes" t-value="doc.show_tax()"/>
+                                    <t t-foreach="taxes['tax_groups']" t-as="tax_des">
+                                        <span t-esc="tax_des"/>
+                                    </t>
+                                </div>
+                                <span t-if="'P' in doc.name">
+                                    <t t-if="lang=='en_US'">Taxes</t>
+                                    <t t-if="lang != 'en_US'">Steuern</t>
+                                </span>
+
                             </td>
                             <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                                <span t-esc="round(doc.amount_tax,2)"/> €
+                                <span t-esc="round(doc.amount_tax,2)"/>
+                                €
                             </td>
                         </t>
                     </tr>
@@ -266,181 +330,239 @@
                         </td>
                     </tr>
                 </table>
-                <br/>
-                <div style="text-align:justify;">
-                    <p>
-                        <t t-if="lang=='en_US'">Any product images are representations of the offered model, but not necessarily the chosen variant.
-                        Prices are in euros, per unit excluding VAT, valid for the offered quantity.</t>
-                        <t t-if="lang!='en_US'">Etwaige Produktbilder sind eine Abbildung des offerierten Modells, aber nicht unbedingt der gewählten Ausführung.
-                        Preise verstehen sich in Euro, pro Stück exklusive Mehrwertsteuer, gültig für die angebotene Stückzahl.</t>
-                    </p>
-                </div>
-                <br/>
-                <div class="col-md-12" name="total" style="margin-right:100px;"/>
-                <div class="clearfix"/>
-                <div class="row pb-2">
-                    <div class="col-2">
+                <div t-if="'P' not in doc.name">
+                    <br/>
+                    <div style="text-align:justify;">
                         <p>
-                           <strong style="padding-right:30px;">
-                                <t t-if="lang=='en_US'">Delivery:</t>
-                                <t t-if="lang!='en_US'">Lieferung:</t>
-                            </strong>
-                        </p>
-                    </div>
-                    <div class="col-10">
-                        <p>
-                            <t t-if="doc.state in ['draft','sent']">
-                                <t t-esc="doc.delivery_term_quot"/>
-                        </t>
-                            <t t-else="">
-                                <t t-esc="doc.delivery_term_sale"/>
-                        </t>
-                        </p>
-                    </div>
-                </div>
-                <div  class="row pb-2">
-                    <div class="col-2">
-                        <p>
-                            <strong style="padding-right:30px;">
-                                <t t-if="lang=='en_US'">Delivery Time:</t>
-                                <t t-if="lang!='en_US'">Lieferzeit:</t>
-                            </strong>
-                        </p>
-                    </div>
-                    <div class="col-10">
-                        <p>
-                            <t t-if="doc.state in ['draft','sent']">
-                                <t t-esc="doc.delivery_time_quot"/>,
-                                <t t-if="lang=='en_US'">Each delivery is subject to the condition that we ourselves are delivered correctly and on time. We cannot be held responsible for delayed deliveries.</t>
-                                <t t-if="lang!='en_US'">Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete Lieferungen können wir nicht verantwortlich gemacht werden.</t>
+                            <t t-if="lang=='en_US'">Any product images are representations of the offered model, but not
+                                necessarily the chosen variant.
+                                Prices are in euros, per unit excluding VAT, valid for the offered quantity.
                             </t>
-                            <t t-else="" t-translation="on">
-                                <t t-esc="doc.delivery_time_sale"/>,
-                                <t t-if="lang=='en_US'">Each delivery is subject to the condition that we ourselves are delivered correctly and on time. We cannot be held responsible for delayed deliveries. Once the goods have arrived in our warehouse, we will promptly contact you to arrange a delivery/order confirmation. The delivery time begins upon order confirmation and the arrival of an agreed deposit. In case of self-collection, the ordered goods must be picked up from our warehouse within 7 days. In case of delayed pick-up, storage costs of €6.00 including VAT per day will apply.</t>
-                                <t t-if="lang!='en_US'">jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete Lieferungen können wir nicht verantwortlich gemacht werden. Sobald die Ware in unserem Lager eingetroffen ist, werden wir uns umgehend mit Ihnen in Verbindung setzen, um einen Liefer/Auftragsklarheit zu vereinbaren. Die Lieferzeit beginnt mit Auftragsklarheit und dem Eintreffen einer vereinbarten Anzahlung. Bei Selbtabholung ist die bestellte Ware innerhalb von 7 Tagen von unserem Lager abzuholen. Bei verspäteter Abholung fallen Lagerkosten von €6,00 inkl. MwSt. pro Tag an.</t>
+                            <t t-if="lang!='en_US'">Etwaige Produktbilder sind eine Abbildung des offerierten Modells,
+                                aber nicht unbedingt der gewählten Ausführung.
+                                Preise verstehen sich in Euro, pro Stück exklusive Mehrwertsteuer, gültig für die
+                                angebotene Stückzahl.
                             </t>
                         </p>
                     </div>
-                </div>
-                <div class="row pb-2">
-                    <div class="col-2">
-                        <p>
-                            <strong style="padding-right:30px;">
-                                <t t-if="lang=='en_US'">Payment Terms:</t>
-                                <t t-if="lang!='en_US'">Zahlungsziel:</t>
-                            </strong>
-                        </p>
-                    </div>
-                    <div class="col-10">
-                        <p>
-                            <t t-if="doc.payment_term_id" t-esc="doc.payment_term_id.name"/>
-                            <t t-if="lang=='en_US'">If the payment term is exceeded, 1.5% per month will be charged. The goods remain our property until full payment is received.</t>
-                            <t t-if="lang!='en_US'">Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet. Die Ware bleibt bis zur vollständigen Bezahlung in unserem Eigentum.</t>
-                        </p>
-                    </div>
-                </div>
-                <div t-if="doc.state in ['draft','sent']" class="row pb-2">
-                    <div class="col-2">
-                        <p>
-                            <strong style="padding-right:30px;">
-                                <t t-if="lang=='en_US'">Validity:</t>
-                                <t t-if="lang!='en_US'">Gültigkeit:</t>
-                            </strong>
-                        </p>
-                    </div>
-                    <div class="col-10">
-                        <p>
-                            <t t-if="lang=='en_US'">The offer is valid until</t>
-                            <t t-if="lang!='en_US'">Das Angebot ist gültig bis</t>
-                            <t t-if="doc.validity_date" t-esc="doc.validity_date"/>
-                        </p>
-                    </div>
-                </div>
-                <br/>
-                <div t-if="doc.state not in ['draft','sent']" class="row">
-                    <div class="col-6">
-                        <p>
-                            <strong>
-                                <u>
-                                    <t t-if="lang=='en_US'">Delivery Address</t>
-                                    <t t-if="lang!='en_US'">Lieferadresse</t>
-                                </u>
-                            </strong>
-                        </p>
-                        <div>
+                    <br/>
+                    <div class="col-md-12" name="total" style="margin-right:100px;"/>
+                    <div class="clearfix"/>
+                    <div class="row pb-2">
+                        <div class="col-2">
                             <p>
-                                <span style="display:block;">
-                                    <span t-field="doc.partner_shipping_id.parent_id.name" />,</span>
-                                <span t-field="doc.partner_shipping_id.name" style="display:block;"/>
-                                <div t-field="doc.partner_shipping_id"
-                                t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                <strong style="padding-right:30px;">
+                                    <t t-if="lang=='en_US'">Delivery:</t>
+                                    <t t-if="lang!='en_US'">Lieferung:</t>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <t t-if="doc.state in ['draft','sent']">
+                                    <t t-if="'delivery_term_quot' in doc" t-esc="doc.delivery_term_quot"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-if="'delivery_term_sale' in doc" t-esc="doc.delivery_term_sale"/>
+                                </t>
                             </p>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <p>
-                            <strong>
-                                <u>
-                                    <t t-if="lang=='en_US'">Billing Address</t>
-                                    <t t-if="lang!='en_US'">Rechnungsadresse</t>
-                                </u>
-                            </strong>
-                        </p>
-                        <div>
+                    <div class="row pb-2">
+                        <div class="col-2">
                             <p>
-                                <span style="display:block;">
-                                    <span t-field="doc.partner_invoice_id.parent_id.name"/>,</span>
-                                <span t-field="doc.partner_invoice_id.name" style="display:block;"/>
-                                <div t-field="doc.partner_invoice_id"
-                            t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                <strong style="padding-right:30px;">
+                                    <t t-if="lang=='en_US'">Delivery Time:</t>
+                                    <t t-if="lang!='en_US'">Lieferzeit:</t>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <t t-if="doc.state in ['draft','sent']">
+                                    <t t-if="'delivery_time_quot' in doc" t-esc="doc.delivery_time_quot"/>,
+                                    <t t-if="lang=='en_US'">Each delivery is subject to the condition that we ourselves
+                                        are delivered correctly and on time. We cannot be held responsible for delayed
+                                        deliveries.
+                                    </t>
+                                    <t t-if="lang!='en_US'">Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst
+                                        richtig und rechtzeitig beliefert werden. Für verspätete Lieferungen können wir
+                                        nicht verantwortlich gemacht werden.
+                                    </t>
+                                </t>
+                                <t t-else="" t-translation="on">
+                                    <t t-if="'delivery_time_sale' in doc" t-esc="doc.delivery_time_sale"/>,
+                                    <t t-if="lang=='en_US'">Each delivery is subject to the condition that we ourselves
+                                        are delivered correctly and on time. We cannot be held responsible for delayed
+                                        deliveries. Once the goods have arrived in our warehouse, we will promptly
+                                        contact you to arrange a delivery/order confirmation. The delivery time begins
+                                        upon order confirmation and the arrival of an agreed deposit. In case of
+                                        self-collection, the ordered goods must be picked up from our warehouse within 7
+                                        days. In case of delayed pick-up, storage costs of €6.00 including VAT per day
+                                        will apply.
+                                    </t>
+                                    <t t-if="lang!='en_US'">jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst
+                                        richtig und rechtzeitig beliefert werden. Für verspätete Lieferungen können wir
+                                        nicht verantwortlich gemacht werden. Sobald die Ware in unserem Lager
+                                        eingetroffen ist, werden wir uns umgehend mit Ihnen in Verbindung setzen, um
+                                        einen Liefer/Auftragsklarheit zu vereinbaren. Die Lieferzeit beginnt mit
+                                        Auftragsklarheit und dem Eintreffen einer vereinbarten Anzahlung. Bei
+                                        Selbtabholung ist die bestellte Ware innerhalb von 7 Tagen von unserem Lager
+                                        abzuholen. Bei verspäteter Abholung fallen Lagerkosten von €6,00 inkl. MwSt. pro
+                                        Tag an.
+                                    </t>
+                                </t>
                             </p>
                         </div>
                     </div>
+                    <div class="row pb-2">
+                        <div class="col-2">
+                            <p>
+                                <strong style="padding-right:30px;">
+                                    <t t-if="lang=='en_US'">Payment Terms:</t>
+                                    <t t-if="lang!='en_US'">Zahlungsziel:</t>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <t t-if="doc.payment_term_id" t-esc="doc.payment_term_id.name"/>
+                                <t t-if="lang=='en_US'">If the payment term is exceeded, 1.5% per month will be charged.
+                                    The goods remain our property until full payment is received.
+                                </t>
+                                <t t-if="lang!='en_US'">Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet. Die
+                                    Ware bleibt bis zur vollständigen Bezahlung in unserem Eigentum.
+                                </t>
+                            </p>
+                        </div>
+                    </div>
+                    <div t-if="doc.state in ['draft','sent']" class="row pb-2">
+                        <div class="col-2">
+                            <p>
+                                <strong style="padding-right:30px;">
+                                    <t t-if="lang=='en_US'">Validity:</t>
+                                    <t t-if="lang!='en_US'">Gültigkeit:</t>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <t t-if="lang=='en_US'">The offer is valid until</t>
+                                <t t-if="lang!='en_US'">Das Angebot ist gültig bis</t>
+                                <t t-if="'validity_date' in doc and doc.validity_date" t-esc="doc.validity_date"/>
+                            </p>
+                        </div>
+                    </div>
+                    <br/>
+                    <div t-if="doc.state not in ['draft','sent']" class="row">
+                        <div class="col-6">
+                            <p>
+                                <strong>
+                                    <u>
+                                        <t t-if="lang=='en_US'">Delivery Address</t>
+                                        <t t-if="lang!='en_US'">Lieferadresse</t>
+                                    </u>
+                                </strong>
+                            </p>
+                            <div>
+                                <p>
+                                    <span style="display:block;">
+                                        <span t-field="doc.partner_shipping_id.parent_id.name"/>,
+                                    </span>
+                                    <span t-field="doc.partner_shipping_id.name" style="display:block;"/>
+                                    <div t-field="doc.partner_shipping_id"
+                                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <p>
+                                <strong>
+                                    <u>
+                                        <t t-if="lang=='en_US'">Billing Address</t>
+                                        <t t-if="lang!='en_US'">Rechnungsadresse</t>
+                                    </u>
+                                </strong>
+                            </p>
+                            <div>
+                                <p>
+                                    <span style="display:block;">
+                                        <span t-field="doc.partner_invoice_id.parent_id.name"/>,
+                                    </span>
+                                    <span t-field="doc.partner_invoice_id.name" style="display:block;"/>
+                                    <div t-field="doc.partner_invoice_id"
+                                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <t t-if="doc.state in ['draft','sent']">
+                            <p>
+                                <t t-if="lang=='en_US'">All deliveries are subject to our Terms and Conditions,
+                                    available at agb.pfau1010.com. We hope that our offer meets your expectations. You
+                                    can reach us during our business hours at 01 535 40 75 or via email at
+                                    office@pfau1010.com.
+                                </t>
+                                <t t-if="lang!='en_US'">Für alle Lieferungen gelten unsere Allgemeinen
+                                    Geschäftsbedingungen, hinterlegt unter agb.pfau1010.com. Wir hoffen, dass unser
+                                    Angebot Ihren Vorstellungen entspricht. Sie erreichen uns innerhalb unserer
+                                    Geschäftszeiten unter 01 535 40 75 oder auch per email office@pfau1010.com.
+                                </t>
+                            </p>
+                        </t>
+                        <t t-else="">
+                            <p>
+                                <t t-if="lang=='en_US'">We kindly ask for confirmation of the order confirmation under
+                                    the agreed conditions and for return.
+                                </t>
+                                <t t-if="lang!='en_US'">Wir bitten um Bestätigung der Auftragsbestätigung zu den
+                                    vereinbarten Bedingungen und Retournierung.
+                                </t>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                --------------------------------------------------------------------
+                                <br/>
+                                <t t-if="lang=='en_US'">Date, Name, and Signature</t>
+                                <t t-if="lang!='en_US'">Datum, Name und Unterschrift</t>
+                            </p>
+                        </t>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <t t-esc="doc.user_id.name"/>
+                    </div>
                 </div>
-                <br/>
-                <br/>
-                <div>
-                    <t t-if="doc.state in ['draft','sent']">
-                        <p>
-                            <t t-if="lang=='en_US'">All deliveries are subject to our Terms and Conditions, available at agb.pfau1010.com. We hope that our offer meets your expectations. You can reach us during our business hours at 01 535 40 75 or via email at office@pfau1010.com.</t>
-                            <t t-if="lang!='en_US'">Für alle Lieferungen gelten unsere Allgemeinen Geschäftsbedingungen, hinterlegt unter agb.pfau1010.com. Wir hoffen, dass unser Angebot Ihren Vorstellungen entspricht. Sie erreichen uns innerhalb unserer Geschäftszeiten unter 01 535 40 75 oder auch per email office@pfau1010.com.</t>
-                        </p>
-                    </t>
-                    <t t-else="">
-                        <p>
-                            <t t-if="lang=='en_US'">We kindly ask for confirmation of the order confirmation under the agreed conditions and for return.</t>
-                            <t t-if="lang!='en_US'">Wir bitten um Bestätigung der Auftragsbestätigung zu den vereinbarten Bedingungen und Retournierung.</t>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            --------------------------------------------------------------------
-                            <br/>
-                            <t t-if="lang=='en_US'">Date, Name, and Signature</t>
-                            <t t-if="lang!='en_US'">Datum, Name und Unterschrift</t>
-                        </p>
-                    </t>
-                </div>
-                <br/>
-                <br/>
-                <div>
-                    <t t-esc="doc.user_id.name"/>
-                </div>
-                <div class="footer" >
+
+                <div class="footer">
                     <div class="text-center">
                         <p class="footer-size">
-                            <t t-if="lang=='en_US'">PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM GESTADE, 1010 VIENNA
-                        PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA
-                        RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW</t>
-                            <t t-if="lang!='en_US'">PFAU OG, GESELLSCHAFT FÜR OBJEKTEINRICHTUNG UND INNENRAUMGESTALTUNG, AM GESTADE, 1010 WIEN
-                        TELEFON: +43 -1- 535 40 75, FAX DW 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, UID-NR. ATU 10249006, FN 9447v HG WIEN
-                        RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NR.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW</t>
+                            <t t-if="lang=='en_US'">PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM
+                                GESTADE, 1010 VIENNA
+                                PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU
+                                10249006, FN 9447v HG VIENNA
+                                RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000
+                                1038 4774, BIC: RLNWATWW
+                            </t>
+                            <t t-if="lang!='en_US'">PFAU OG, GESELLSCHAFT FÜR OBJEKTEINRICHTUNG UND INNENRAUMGESTALTUNG,
+                                AM GESTADE, 1010 WIEN
+                                TELEFON: +43 -1- 535 40 75, FAX DW 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, UID-NR. ATU
+                                10249006, FN 9447v HG WIEN
+                                RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NR.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000
+                                1038 4774, BIC: RLNWATWW
+                            </t>
                         </p>
                     </div>
                 </div>
             </div>
+
         </xpath>
     </template>
 </odoo>
