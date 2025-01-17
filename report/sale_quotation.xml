@@ -3,7 +3,7 @@
     <template id="inherit_sale_quotations" name="template_name" inherit_id="l10n_din5008.external_layout_din5008">
         <!-- logo position change -->
         <xpath expr="//table[contains(@class,'company_header')]" position="replace">
-            <div t-if="doc">
+            <div t-if="o">
                 <img class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}" height="110px"
                      width="90px"/>
             </div>
@@ -151,6 +151,10 @@
                               t-field="doc.cover_note_sale"/>
                         <br/>
                     </t>
+                </div>
+                <div t-if="'P' in doc.name">
+                     <br/>
+                     <br/>
                 </div>
                 <div t-if="'P' in doc.name" class="row">
 
