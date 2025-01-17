@@ -3,7 +3,7 @@
     <template id="inherit_sale_quotations" name="template_name" inherit_id="l10n_din5008.external_layout_din5008">
         <!-- logo position change -->
         <xpath expr="//table[contains(@class,'company_header')]" position="replace">
-            <div t-if="o">
+            <div t-if="doc">
                 <img class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}" height="110px"
                      width="90px"/>
             </div>
