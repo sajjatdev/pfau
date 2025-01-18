@@ -35,7 +35,7 @@
                             </t>
                             <t t-if="lang!='en_US'">
                                 <t t-if="'P' not in doc.name">OFFERT</t>
-                                <t t-if="'P' not in doc.name">AUFTRAGSBESTÄTIGUNG</t>
+                                <t t-if="'P' in doc.name">AUFTRAGSBESTÄTIGUNG</t>
                             </t>
                             <br/>N .:
                             <span t-field="doc.name"/>
@@ -179,6 +179,8 @@
                         </span>
                     </div>
                 </div>
+                <t t-set="status" t-value="doc.is_discount() or False"/>
+                <t t-esc="status"/>
                 <br/>
                 <br/>
                 <!-- Product Table -->
@@ -208,7 +210,8 @@
                                 <t t-if="lang=='en_US'">Quantity</t>
                                 <t t-if="lang!='en_US'">Stück</t>
                             </th>
-                            <th t-if="doc.is_discount()" class="text-start"
+
+                            <th t-if="" class="text-start"
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                 <t t-if="lang=='en_US'">Disc.</t>
                                 <t t-if="lang!='en_US'">Disc.</t>
@@ -253,7 +256,7 @@
                                     <span t-field="line.discount"/>%
                                 </td>
                                 <td class="text-center" style="vertical-align: middle;">
-                                    <span t-field="line.price_subtotal"/>
+                                    <span t-field="line.price_subtotal"/> 
                                 </td>
                             </tr>
                         </t>
@@ -273,7 +276,7 @@
                         </td>
                         <td class="text-end"
                             style="padding:0 10px 0 0; margin:0px; border-top: 1px solid black; vertical-align: middle;">
-                            <span t-esc="total_price"/>
+                            <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                         </td>
                     </tr>
                     <tr t-if="discount!=0" style="height: -2px;">
@@ -284,7 +287,7 @@
                             <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
                         </td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                            <span t-esc="round(discount,2)"/>
+                         <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
                             €
                         </td>
                     </tr>
@@ -294,7 +297,7 @@
                             <t t-if="lang!='en_US'">Zwischensumme</t>
                         </td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                            <span t-esc="doc.amount_untaxed"/>
+                         <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
                             €
                         </td>
                     </tr>
@@ -315,7 +318,7 @@
 
                             </td>
                             <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                                <span t-esc="round(doc.amount_tax,2)"/>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
                                 €
                             </td>
                         </t>
@@ -329,7 +332,7 @@
                         </td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;" width="10">
                             <b>
-                                <span t-esc="doc.amount_total"/>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                             </b>
                         </td>
                     </tr>

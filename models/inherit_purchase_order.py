@@ -3,7 +3,6 @@ from odoo import  api,fields,models
 class InheritPurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-
     def is_discount(self):
         status = False
         for line in self.order_line:
@@ -22,8 +21,8 @@ class InheritPurchaseOrder(models.Model):
             total_price += line.price_total
 
             # Process each tax associated with the order line
-            if line.tax_id:
-                for tax in line.tax_id:
+            if line.taxes_id:
+                for tax in line.taxes_id:
                     # Group taxes by their rate
                     tax_rate = tax.invoice_label  # Tax percentage (e.g., 10% or 20%)
                     tax_amount = line.price_tax  # Amount of tax applied on the line
