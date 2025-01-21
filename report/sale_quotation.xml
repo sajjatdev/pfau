@@ -454,12 +454,11 @@
                         <div class="col-6">
                             <p>
                                 <strong>
-                                    <u>
-                                        <t t-if="lang=='en_US'">Delivery Address</t>
-                                        <t t-if="lang!='en_US'">Lieferadresse</t>
-                                    </u>
+                                   <t t-if="lang=='en_US'">Delivery Address</t>
+                                    <t t-if="lang!='en_US'">Lieferadresse</t>
                                 </strong>
                                 <br/>
+                                 <span t-field="doc.partner_shipping_id.name"/>
                                  <span t-field="doc.partner_shipping_id.parent_id.name"/>
                                  <div t-field="doc.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                             </p>
