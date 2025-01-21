@@ -460,12 +460,8 @@
                                     </u>
                                 </strong>
                                 <br/>
-                                <span style="display:block;">
-                                    <span t-field="doc.partner_shipping_id.parent_id.name"/>,
-                                    </span>
-                                <span t-field="doc.partner_shipping_id.name" style="display:block;"/>
-                                <div t-field="doc.partner_shipping_id"
-                                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                 <span t-field="doc.partner_shipping_id.parent_id.name"/>
+                                 <div t-field="doc.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                             </p>
                         </div>
                         <div class="col-6">
