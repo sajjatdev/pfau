@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_order_inherit_pfau" model="ir.ui.view">
+            <field name="name">pfau.view.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="other_delivery" />
+                    <field  name="delivery_address" placeholder="Write delivery address" invisible="not other_delivery" />
+                </xpath>
+        </field>
+        </record>
+    </data>
+</odoo>

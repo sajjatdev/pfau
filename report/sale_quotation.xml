@@ -3,23 +3,18 @@
     <template id="inherit_sale_quotations" name="template_name" inherit_id="l10n_din5008.external_layout_din5008">
         <!-- logo position change -->
         <xpath expr="//table[contains(@class,'company_header')]" position="replace">
-            <div t-if="doc">
-                <img class="header-logo-image" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}" height="110px"
-                     width="90px"/>
-            </div>
+            <img class="header-logo-image" src="/pfau/static/src/imags/company_logo.gif" height="110px" width="90px"/>
         </xpath>
         <!--customer information block -->
         <xpath expr="//div[contains(@t-attf-class, 'din_page invoice_note')]" position="replace">
             <t t-set="doc" t-value="o.with_context({'lang':o.partner_id.lang})"/>
             <t t-set="lang" t-value="o.partner_id.lang"/>
-
-            <div
+            <div t-if="'/' not in doc.name and  'I' not in doc.name"
                     t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
                     t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
                     t-att-data-oe-model="doc and doc._name"
                     t-att-data-oe-id="doc and doc.id">
                 <div class="title_source_div">
-
                     <strong class="title_source">
                         <span t-if="doc.state not in ['draft', 'sent']">
                             <t t-if="lang=='en_US'">ORDER CONFIRMATION</t>
@@ -35,15 +30,13 @@
                             </t>
                             <t t-if="lang!='en_US'">
                                 <t t-if="'P' not in doc.name">OFFERT</t>
-                                <t t-if="'P' in doc.name">AUFTRAGSBESTÄTIGUNG</t>
+                                <t t-if="'P' in doc.name">PURCHASE ORDER</t>
                             </t>
                             <br/>N .:
                             <span t-field="doc.name"/>
 
                         </span>
                     </strong>
-
-
                 </div>
                 <div class="row information_block">
                     <div class="col-5 title">
@@ -153,11 +146,10 @@
                     </t>
                 </div>
                 <div t-if="'P' in doc.name">
-                     <br/>
-                     <br/>
+                    <br/>
+                    <br/>
                 </div>
                 <div t-if="'P' in doc.name" class="row">
-
                     <div class="col-3">
                         <span>
                             <strong>
@@ -179,11 +171,10 @@
                         </span>
                     </div>
                 </div>
-                <t t-set="status" t-value="doc.is_discount() or False"/>
-                <t t-esc="status"/>
                 <br/>
                 <br/>
                 <!-- Product Table -->
+                <t t-set="display_discount" t-value="any(l.discount for l in doc.order_line)"/>
                 <table class="table table-sm o_main_table table-borderless">
                     <thead style="border-bottom: 0.5px solid black;">
                         <tr>
@@ -210,8 +201,7 @@
                                 <t t-if="lang=='en_US'">Quantity</t>
                                 <t t-if="lang!='en_US'">Stück</t>
                             </th>
-
-                            <th t-if="" class="text-start"
+                            <th t-if="display_discount" class="text-start"
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                 <t t-if="lang=='en_US'">Disc.</t>
                                 <t t-if="lang!='en_US'">Disc.</t>
@@ -252,11 +242,11 @@
                                 <td class="text-center" style="vertical-align: middle;">
                                     <t t-esc="int(line.product_uom_qty)"/>
                                 </td>
-                                <td t-if="doc.is_discount()" class="text-center" style="vertical-align: middle;">
+                                <td t-if="display_discount" class="text-center" style="vertical-align: middle;">
                                     <span t-field="line.discount"/>%
                                 </td>
                                 <td class="text-center" style="vertical-align: middle;">
-                                    <span t-field="line.price_subtotal"/> 
+                                    <span t-field="line.price_subtotal"/>
                                 </td>
                             </tr>
                         </t>
@@ -287,7 +277,7 @@
                             <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
                         </td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                         <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                            <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
                             €
                         </td>
                     </tr>
@@ -297,13 +287,12 @@
                             <t t-if="lang!='en_US'">Zwischensumme</t>
                         </td>
                         <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                         <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                            <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
                             €
                         </td>
                     </tr>
                     <tr style="height: 2px;">
                         <t t-if="doc.amount_tax &gt; 0">
-
                             <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
                                 <div t-if="'P' not in doc.name">
                                     <t t-set="taxes" t-value="doc.show_tax()"/>
@@ -315,7 +304,6 @@
                                     <t t-if="lang=='en_US'">Taxes</t>
                                     <t t-if="lang != 'en_US'">Steuern</t>
                                 </span>
-
                             </td>
                             <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
                                 <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
@@ -470,17 +458,14 @@
                                         <t t-if="lang!='en_US'">Lieferadresse</t>
                                     </u>
                                 </strong>
-                            </p>
-                            <div>
-                                <p>
-                                    <span style="display:block;">
-                                        <span t-field="doc.partner_shipping_id.parent_id.name"/>,
+                                <br/>
+                                <span style="display:block;">
+                                    <span t-field="doc.partner_shipping_id.parent_id.name"/>,
                                     </span>
-                                    <span t-field="doc.partner_shipping_id.name" style="display:block;"/>
-                                    <div t-field="doc.partner_shipping_id"
+                                <span t-field="doc.partner_shipping_id.name" style="display:block;"/>
+                                <div t-field="doc.partner_shipping_id"
                                          t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
-                                </p>
-                            </div>
+                            </p>
                         </div>
                         <div class="col-6">
                             <p>
@@ -490,17 +475,14 @@
                                         <t t-if="lang!='en_US'">Rechnungsadresse</t>
                                     </u>
                                 </strong>
-                            </p>
-                            <div>
-                                <p>
-                                    <span style="display:block;">
-                                        <span t-field="doc.partner_invoice_id.parent_id.name"/>,
+                                <br/>
+                                <span style="display:block;">
+                                    <span t-field="doc.partner_invoice_id.parent_id.name"/>,
                                     </span>
-                                    <span t-field="doc.partner_invoice_id.name" style="display:block;"/>
-                                    <div t-field="doc.partner_invoice_id"
+                                <span t-field="doc.partner_invoice_id.name" style="display:block;"/>
+                                <div t-field="doc.partner_invoice_id"
                                          t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
-                                </p>
-                            </div>
+                            </p>
                         </div>
                     </div>
                     <br/>
@@ -547,7 +529,21 @@
                         <t t-esc="doc.user_id.name"/>
                     </div>
                 </div>
-
+                <!-- Purchase Order Delivery Address -->
+                <div t-if="'P' in doc.name and doc.other_delivery==True" class="row">
+                    <div class="col-6">
+                        <p>
+                            <strong>
+                                <u>
+                                    <t t-if="lang=='en_US'">Delivery Address</t>
+                                    <t t-if="lang!='en_US'">Lieferadresse</t>
+                                </u>
+                            </strong>
+                            <br/>
+                            <t t-esc="doc.delivery_address"/>
+                        </p>
+                    </div>
+                </div>
                 <div class="footer">
                     <div class="text-center">
                         <p class="footer-size">
@@ -569,7 +565,300 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Invoice Report -->
+            <div t-if="'I' in doc.name" t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
+                    t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+                    t-att-data-oe-model="doc and doc._name"
+                    t-att-data-oe-id="doc and doc.id">
+                <div class="title_source_div">
+                    <strong class="title_source">
+                        <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" >
+                            <t t-if="lang=='en_US'">Invoice</t>
+                            <t t-if="lang!='en_US'">Rechnung</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                        <span t-elif="o.move_type == 'out_invoice' and o.state == 'draft'" >
+                            <t t-if="lang=='en_US'">Draft Invoice</t>
+                            <t t-if="lang!='en_US'">Rechnungsentwurf</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                        <span t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">
+                            <t t-if="lang=='en_US'">Cancelled Invoice</t>
+                            <t t-if="lang!='en_US'">Stornierte Rechnung</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                        <span t-elif="o.move_type == 'out_refund' and o.state == 'posted'">
+                            <t t-if="lang=='en_US'">Credit Note</t>
+                            <t t-if="lang!='en_US'">Gutschrift</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                        <span t-elif="o.move_type == 'out_refund' and o.state == 'draft'">
+                            <t t-if="lang=='en_US'">Draft Credit Note</t>
+                            <t t-if="lang!='en_US'">Entwurf einer Gutschrift</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                        <span t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">
+                            <t t-if="lang=='en_US'">Cancelled Credit Note</t>
+                            <t t-if="lang!='en_US'">Stornierte Gutschrift</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                        <span t-elif="o.move_type == 'in_refund'">
+                            <t t-if="lang=='en_US'">Vendor Credit Note</t>
+                            <t t-if="lang!='en_US'">Kreditorengutschrift</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                        <span t-elif="o.move_type == 'in_invoice'">
+                            <t t-if="lang=='en_US'">Vendor Credit Note</t>
+                            <t t-if="lang!='en_US'">Kreditorengutschrift</t>
+                            <br/>
+                            <span t-field="o.name"/>
+                        </span>
+                    </strong>
+                </div>
+                <div class="row information_block">
+                    <div class="col-5 title">
+                        <strong>
+                            <t t-if="doc.partner_id">
+                                <span t-field="doc.partner_id.name"/>
+                            </t>
+                        </strong>
+                        <br/>
+                        <span t-field="doc.partner_id.street"/>
+                        <br/>
+                        <span t-field="doc.partner_id.zip"/>
+                        <span t-field="doc.partner_id.state_id.code"/>
+                        <span t-field="doc.partner_id.city"/>
+                        <br/>
+                        <span t-field="doc.partner_id.country_id"/>
+                        <t t-if='o.partner_id.vat'>
+                            <span>VAT</span>:
+                            <span t-field="o.partner_id.vat"/>
+                        </t>
+                    </div>
+                    <div t-if="'P' not in doc.name" class="col-7">
+                        <div class="row">
+                            <!-- Right-aligned column -->
+                            <div class="col-4 text-start">
+                                <!-- State-based labels -->
+                                <span>
+                                    <t t-if="lang=='en_US'">Date</t>
+                                    <t t-if="lang!='en_US'">Datum</t>
+                                    <br/>
+                                </span>
+                                <span t-if='doc.delivery_date'>
+                                    <t t-if="lang=='en_US'">Delivery Date</t>
+                                    <t t-if="lang!='en_US'">Liefertermin</t>
+                                    <br/>
+                                </span>
+                                <span>
+                                    <t t-if="lang=='en_US'">Sale Person</t>
+                                    <t t-if="lang!='en_US'">Verkäufer</t>
+                                    <br/>
+                                </span>
+                                <span t-if='doc.user_id.email'>
+                                    <t t-if="lang=='en_US'">Email</t>
+                                    <t t-if="lang!='en_US'">Email</t>
+                                </span>
+                            </div>
+                            <!-- Left-aligned column -->
+                            <div class="col-6 text-start">
+                                <!-- Date based on state -->
+                                <span t-field="doc.invoice_date" t-options="{'widget':'date'}"/>
+                                <br/>
+                                <t t-if="doc.delivery_date">
+                                    <span t-field="doc.delivery_date" t-options="{'widget':'date'}"/>
+                                    <br/>
+                                </t>
+                                <span t-field="doc.user_id.name"/>
+                                <br/>
+                                <span t-if="doc.user_id.email">
+                                    <span t-field="doc.user_id.email"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-7">
+                        <div class="row">
+                            <div class="col-auto">
+                                <b>
+                                    <t t-if="lang=='en_US'">Payment Date</t>
+                                    <t t-if="lang!='en_US'">Zahlungsdatum</t>
+                                </b>
+                                <p class="m-0" t-field="doc.invoice_date_due"/>
+                            </div>
+                            <div class="col-auto">
+                                <b>
+                                    <t t-if="lang=='en_US'">Source</t>
+                                    <t t-if="lang!='en_US'">Quelle</t>
+                                </b>
+                                <p class="m-0" t-field="doc.invoice_origin"/>
+                            </div>
+                            <div class="col-auto">
+                                <b>
+                                    <t t-if="lang=='en_US'">Reference</t>
+                                    <t t-if="lang!='en_US'">Referenz</t>
+                                </b>
+                                <p class="m-0" t-field="o.ref"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <t t-set="display_discount" t-value="any(l.discount for l in doc.invoice_line_ids)"/>
+                <table class="table table-sm o_main_table table-borderless">
+                    <thead style="border-bottom: 0.5px solid black;">
+                        <tr>
+                            <th class="text-start"
+                                style="width:100px; border-top: 0px solid white !important; border-bottom: 1px solid black; width:50px;">
+                                <t t-if="lang=='en_US'">Position</t>
+                                <t t-if="lang!='en_US'">Position</t>
+                                <!-- Same in both languages -->
+                            </th>
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <t t-if="lang=='en_US'">Product</t>
+                                <t t-if="lang!='en_US'">Produkt</t>
+                            </th>
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;"/>
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <t t-if="lang=='en_US'">Price/Unit</t>
+                                <t t-if="lang!='en_US'">Preis/Stück</t>
+                            </th>
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <t t-if="lang=='en_US'">Quantity</t>
+                                <t t-if="lang!='en_US'">Stück</t>
+                            </th>
+                            <th t-if="display_discount" class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <t t-if="lang=='en_US'">Disc.</t>
+                                <t t-if="lang!='en_US'">Disc.</t>
+                            </th>
+                            <th class="text-start"
+                                style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <t t-if="lang=='en_US'">Total</t>
+                                <t t-if="lang!='en_US'">Summe</t>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-set="current_subtotal" t-value="0"/>
+                        <t t-foreach="doc.invoice_line_ids" t-as="line">
+                            <tr t-if="line.price_unit &gt;= 0 " style="border-bottom: 0.5px solid #dcdcdc;">
+                                <td style="vertical-align: top;">
+                                    <strong>
+                                        <span t-if="'position' in line" t-field="line.position"/>
+                                    </strong>
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <span t-field="line.product_id.name"/>
+                                    <br/>
+                                    <t t-foreach="line.product_id.product_template_attribute_value_ids"
+                                       t-as="attribute">
+                                        <span t-field="attribute.display_name"/>
+                                        <br/>
+                                    </t>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <img t-if="line.product_id.image_1920"
+                                         t-att-src="image_data_uri(line.product_id.image_1920)" width="50px"
+                                         height="50px"/>
+                                </td>
+                                <td class="text-center" style="text-align: center; vertical-align: middle;">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td class="text-center" style="vertical-align: middle;">
+                                    <t t-esc="int(line.quantity)"/>
+                                </td>
+                                <td t-if="display_discount" class="text-center" style="vertical-align: middle;">
+                                    <span t-field="line.discount"/>%
+                                </td>
+                                <td class="text-center" style="vertical-align: middle;">
+                                    <span t-field="line.price_subtotal"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                <table class="table" style="border-bottom: 0.5px solid black !important;">
+                    <t t-set="discount"
+                       t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
+                    <t t-set="total_price"
+                       t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &gt; 0)"/>
+                    <tr>
+                        <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
+                            <t t-if="lang=='en_US'">Net Total</t>
+                            <t t-if="lang!='en_US'">Summe netto</t>
+                        </td>
+                        <td class="text-end"
+                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid black; vertical-align: middle;">
+                            <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                        </td>
+                    </tr>
+                    <tr t-if="discount!=0" style="height: -2px;">
+                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
+                            <t t-if="lang=='en_US'">Conditions</t>
+                            <t t-if="lang!='en_US'">Konditionen</t>
+                            <![CDATA[&nbsp;]]>
+                            <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
+                        </td>
+                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
+                            <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                            €
+                        </td>
+                    </tr>
+                    <tr t-if="discount!=0" style="height: -2px;">
+                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
+                            <t t-if="lang=='en_US'">Subtotal</t>
+                            <t t-if="lang!='en_US'">Zwischensumme</t>
+                        </td>
+                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
+                            <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                            €
+                        </td>
+                    </tr>
+                    <tr style="height: 2px;">
+                        <t t-if="doc.amount_tax &gt; 0">
+                            <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
+                                <span>20% Mwst.</span>
+                            </td>
+                            <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
+                                <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                                €
+                            </td>
+                        </t>
+                    </tr>
+                    <tr style="height: 20px;">
+                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;" width="10">
+                            <b>
+                                <t t-if="lang=='en_US'">Total</t>
+                                <t t-if="lang!='en_US'">Gesamtsumme</t>
+                            </b>
+                        </td>
+                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;" width="10">
+                            <b>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </b>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </xpath>
     </template>
 </odoo>

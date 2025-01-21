@@ -3,6 +3,9 @@ from odoo import  api,fields,models
 class InheritPurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
+    other_delivery = fields.Boolean(string="Other Delivery Address")
+    delivery_address = fields.Text(string="Delivery Address")
+
     def is_discount(self):
         status = False
         for line in self.order_line:
