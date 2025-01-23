@@ -255,18 +255,18 @@
                 </table>
                 <br/>
                 <br/>
-                <table class="table" style="border-bottom: 0.5px solid black !important;">
+                <table class="table">
                     <t t-set="discount"
                        t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                     <t t-set="total_price"
                        t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
                     <tr style="height: 20px;">
-                        <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
+                        <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
                             <t t-if="lang=='en_US'">Net Total</t>
                             <t t-if="lang!='en_US'">Summe netto</t>
                         </td>
                         <td class="text-end"
-                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid black; vertical-align: middle;">
+                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
                             <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                         </td>
                     </tr>
@@ -454,14 +454,15 @@
                         <div class="col-6">
                             <p>
                                 <strong>
-                                    <u>
-                                        <t t-if="lang=='en_US'">Delivery Address</t>
-                                        <t t-if="lang!='en_US'">Lieferadresse</t>
-                                    </u>
+                                <u>
+                                    <t t-if="lang=='en_US'">Delivery Address</t>
+                                    <t t-if="lang!='en_US'">Lieferadresse</t>
+                                </u>
                                 </strong>
-                                <span t-field="doc.partner_shipping_id.name"/>
-                                <span t-field="doc.partner_shipping_id.parent_id.name"/>
-                                <div t-field="doc.partner_invoice_id"
+                             
+                                 <span t-field="doc.partner_shipping_id.name"/>
+                                 <span t-field="doc.partner_shipping_id.parent_id.name"/>
+                                 <div t-field="doc.partner_invoice_id"
                                          t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                             </p>
                         </div>
@@ -794,79 +795,89 @@
                 </table>
                 <br/>
                 <br/>
-                <div class="row border-bottom">
-                    <div class="col-6 border-top pt-2 ps-3">
-                        <span t-if="lang=='en_US'">Net Total</span>
-                        <span t-if="lang!='en_US'">Summe netto</span>
-                    </div>
-                    <div class="col-6 text-end border-top pt-2 pe-3">
-                        <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                    </div>
-                </div>
-                <t t-if="discount!=0">
-                    <div class="row">
-                        <div class="col-6 ps-3 pt-2">
-                            <span t-if="lang=='en_US'">Conditions</span>
-                            <span t-if="lang!='en_US'">Konditionen</span>&nbsp;
+                
+                <table class="table">
+                    <t t-set="discount"
+                       t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
+                    <t t-set="total_price"
+                       t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &gt; 0)"/>
+                    <tr style="height: 20px;">
+                        <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
+                            <t t-if="lang=='en_US'">Net Total</t>
+                            <t t-if="lang!='en_US'">Summe netto</t>
+                        </td>
+                        <td class="text-end"
+                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
+                            <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                        </td>
+                    </tr>
+                    <tr t-if="discount!=0" style="height: 20px;">
+                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
+                            <t t-if="lang=='en_US'">Conditions</t>
+                            <t t-if="lang!='en_US'">Konditionen</t>
+                            <![CDATA[&nbsp;]]>
                             <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
-                        </div>
-                        <div class="col-6 text-end pe-3 pt-2">
-                            <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 ps-3 pt-2">
-                            <span t-if="lang=='en_US'">Subtotal</span>
-                            <span t-if="lang!='en_US'">Zwischensumme</span>
-                        </div>
-                        <div class="col-6 text-end pe-3 pt-2">
-                            <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                        </div>
-                    </div>
-                </t>
-                <t t-if="doc.amount_tax > 0">
-                    <div class="row">
-                        <div class="col-6 ps-3 pt-2">
-                            <span>20% Mwst.</span>
-                        </div>
-                        <div class="col-6 text-end pe-3 pt-2">
-                            <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                        </div>
-                    </div>
-                </t>
-                <div class="row">
-                    <div class="col-6 ps-3 pt-2">
-                        <b>
-                            <span t-if="lang=='en_US'">Total</span>
-                            <span t-if="lang!='en_US'">Gesamtsumme</span>
-                        </b>
-                    </div>
-                    <div class="col-6 text-end pe-3 pt-2">
-                        <b>
-                            <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                        </b>
-                    </div>
-                </div>
+                        </td>
+                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
+                            <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                            €
+                        </td>
+                    </tr>
+                    <tr t-if="discount!=0" style="height: 20px;">
+                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
+                            <t t-if="lang=='en_US'">Subtotal</t>
+                            <t t-if="lang!='en_US'">Zwischensumme</t>
+                        </td>
+                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
+                            <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                            €
+                        </td>
+                    </tr>
+                    <tr style="height: 20px;">
+                        <t t-if="doc.amount_tax &gt; 0">
+                            <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
+                                <span>20% Mwst.</span>
+                            </td>
+                            <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
+                                <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
+                                €
+                            </td>
+                        </t>
+                    </tr>
+                    <tr style="height: 20px;">
+                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;" width="10">
+                            <b>
+                                <t t-if="lang=='en_US'">Total</t>
+                                <t t-if="lang!='en_US'">Gesamtsumme</t>
+                            </b>
+                        </td>
+                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;" width="10">
+                            <b>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </b>
+                        </td>
+                    </tr>
+                </table>
                 <div class="row pb-2">
-                    <div class="col-2">
-                        <p>
-                            <strong style="padding-right:30px;">
-                                <t t-if="lang=='en_US'">Payment Terms:</t>
-                                <t t-if="lang!='en_US'">Zahlungsziel:</t>
-                            </strong>
-                        </p>
-                    </div>
-                    <div class="col-10">
-                        <p>
-                            <t t-if="doc.invoice_payment_term_id" t-esc="doc.invoice_payment_term_id.name"/>
-                            <t t-if="lang=='en_US'">If the payment term is exceeded, 1.5% per month will be charged.
+                        <div class="col-2">
+                            <p>
+                                <strong style="padding-right:30px;">
+                                    <t t-if="lang=='en_US'">Payment Terms:</t>
+                                    <t t-if="lang!='en_US'">Zahlungsziel:</t>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <t t-if="doc.invoice_payment_term_id" t-esc="doc.invoice_payment_term_id.name"/>
+                                <t t-if="lang=='en_US'">If the payment term is exceeded, 1.5% per month will be charged.
                                     The goods remain our property until full payment is received.
                                 </t>
-                            <t t-if="lang!='en_US'">Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet. Die
+                                <t t-if="lang!='en_US'">Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet. Die
                                     Ware bleibt bis zur vollständigen Bezahlung in unserem Eigentum.
                                 </t>
-                        </p>
-                    </div>
+                            </p>
+                        </div>
                 </div>
             </div>
         </xpath>
