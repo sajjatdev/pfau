@@ -255,18 +255,18 @@
                 </table>
                 <br/>
                 <br/>
-                <table class="table">
+                <table class="table" style="border-bottom: 0.5px solid black !important;">
                     <t t-set="discount"
                        t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                     <t t-set="total_price"
                        t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
                     <tr style="height: 20px;">
-                        <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
+                        <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
                             <t t-if="lang=='en_US'">Net Total</t>
                             <t t-if="lang!='en_US'">Summe netto</t>
                         </td>
                         <td class="text-end"
-                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
+                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid black; vertical-align: middle;">
                             <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                         </td>
                     </tr>
@@ -796,18 +796,18 @@
                 <br/>
                 <br/>
                 
-                <table class="table">
+                <table class="table" style="border-bottom: 0.5px solid #dcdcdc !important;">
                     <t t-set="discount"
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                     <t t-set="total_price"
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &gt; 0)"/>
                     <tr style="height: 20px;">
-                        <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
+                        <td style="padding:0 0 0 10px; margin:0px; border-top: 0.5px solid #dcdcdc; vertical-align: middle;">
                             <t t-if="lang=='en_US'">Net Total</t>
                             <t t-if="lang!='en_US'">Summe netto</t>
                         </td>
                         <td class="text-end"
-                            style="padding:0 10px 0 0; margin:0px; border-top: 1px solid #dcdcdc; vertical-align: middle;">
+                            style="padding:0 10px 0 0; margin:0px; border-top: 0.5px solid #dcdcdc; vertical-align: middle;">
                             <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                         </td>
                     </tr>
