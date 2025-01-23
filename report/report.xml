@@ -223,7 +223,7 @@
                                     </strong>
                                 </td>
                                 <td style="vertical-align: top;">
-                                    <span t-if="'P' in doc.name " t-field="line.product_id.name"/>
+                                    <span t-field="line.product_id.name"/>
                                     <span t-if="'S' in doc.name " t-field="line.product_id.description_sale"/>
                                     <br/>
                                     <t t-foreach="line.product_id.product_template_attribute_value_ids"
