@@ -800,7 +800,7 @@
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                     <t t-set="total_price"
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &gt; 0)"/>
-                    <tr>
+                    <tr style="height: 20px;">
                         <td style="padding:0 0 0 10px; margin:0px; border-top: 1px solid black; vertical-align: middle;">
                             <t t-if="lang=='en_US'">Net Total</t>
                             <t t-if="lang!='en_US'">Summe netto</t>
@@ -810,7 +810,7 @@
                             <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                         </td>
                     </tr>
-                    <tr t-if="discount!=0" style="height: -2px;">
+                    <tr t-if="discount!=0" style="height: 20px;">
                         <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
                             <t t-if="lang=='en_US'">Conditions</t>
                             <t t-if="lang!='en_US'">Konditionen</t>
@@ -822,7 +822,7 @@
                             €
                         </td>
                     </tr>
-                    <tr t-if="discount!=0" style="height: -2px;">
+                    <tr t-if="discount!=0" style="height: 20px;">
                         <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
                             <t t-if="lang=='en_US'">Subtotal</t>
                             <t t-if="lang!='en_US'">Zwischensumme</t>
@@ -832,7 +832,7 @@
                             €
                         </td>
                     </tr>
-                    <tr style="height: 2px;">
+                    <tr style="height: 20px;">
                         <t t-if="doc.amount_tax &gt; 0">
                             <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
                                 <span>20% Mwst.</span>
