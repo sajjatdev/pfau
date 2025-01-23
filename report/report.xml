@@ -799,13 +799,13 @@
                 <t t-set="total_price"
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &gt; 0)"/>
                 <div class="row">
-                    <div class="col-6" style="border-top: 1px solid black !important; border-bottom: 1px solid #dcdcdc !important;">
+                    <div class="col-6" style="border-top: 0.5px solid black !important;">
                         <span>
                             <t t-if="lang=='en_US'">Net Total</t>
                             <t t-if="lang!='en_US'">Summe netto</t>
                         </span>
                     </div>
-                    <div class="col-6 text-end" style="border-top: 1px solid black !important;">
+                    <div class="col-6 text-end" style="border-top: 0.5px solid black !important;">
                         <span>
                             <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                         </span>
@@ -854,7 +854,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6" style="border-top: 0.5px solid #dcdcdc; border-bottom: 1px solid black !important;">
+                    <div class="col-6" style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black !important;">
                         <strong>
                             <span>
                                 <t t-if="lang=='en_US'">Total</t>
@@ -862,7 +862,7 @@
                             </span>
                         </strong>
                     </div>
-                    <div class="col-6 text-end" style="border-top: 0.5px solid #dcdcdc; border-bottom: 1px solid black !important;">
+                    <div class="col-6 text-end" style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black !important;">
                         <strong>
                             <span>
                                 <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
