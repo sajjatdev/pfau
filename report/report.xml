@@ -798,81 +798,77 @@
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                 <t t-set="total_price"
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &gt; 0)"/>
-                <div class="row">
-                    <div class="col-6" style="border-top: 0.5px solid black !important;">
-                        <span>
-                            <t t-if="lang=='en_US'">Net Total</t>
-                            <t t-if="lang!='en_US'">Summe netto</t>
-                        </span>
-                    </div>
-                    <div class="col-6 text-end" style="border-top: 0.5px solid black !important;">
-                        <span>
-                            <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                        </span>
-                    </div>
-                </div>
-                <div t-if="discount!=0" class="row">
-                    <div class="col-6" style="border-top: 0.5px solid #dcdcdc !important;">
-                        <span>
-                            <t t-if="lang=='en_US'">Conditions</t>
-                            <t t-if="lang!='en_US'">Konditionen</t>
-                            <![CDATA[&nbsp;]]>
-                            <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
-                        </span>
-                    </div>
-                    <div class="col-6 text-end" style="border-top:  0.5px solid #dcdcdc !important;">
-                        <span>
-                            <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
-                            €
-                        </span>
-                    </div>
-                </div>
-                <div t-if="discount!=0" class="row">
-                    <div class="col-6" style="border-top:  0.5px solid #dcdcdc !important;">
-                        <span>
-                            <t t-if="lang=='en_US'">Subtotal</t>
-                            <t t-if="lang!='en_US'">Zwischensumme</t>
-                        </span>
-                    </div>
-                    <div class="col-6 text-end" style="border-top:  0.5px solid #dcdcdc !important;">
-                        <span>
-                            <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
-                            €
-                        </span>
-                    </div>
-                </div>
-                <div t-if="doc.amount_tax>0" class="row">
-                    <div class="col-6" style="border-top:  0.5px solid #dcdcdc !important;">
-                        <span>
-                            <span>20% Mwst.</span>
-                        </span>
-                    </div>
-                    <div class="col-6 text-end" style="border-top:  0.5px solid #dcdcdc !important;">
-                        <span>
-                            <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                        </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6" style="border-top:  0.5px solid #dcdcdc !important; border-bottom:  0.5px solid black !important;">
-                        <strong>
+                
+                <table class="table-sm o_main_table table-borderless" style="width:100%;">
+                    <tr>
+                        <td style="border-top: 0.5px solid black;">
                             <span>
-                                <t t-if="lang=='en_US'">Total</t>
-                                <t t-if="lang!='en_US'">Gesamtsumme</t>
+                                <t t-if="lang=='en_US'">Net Total</t>
+                                <t t-if="lang!='en_US'">Summe netto</t>
                             </span>
-                        </strong>
-                    </div>
-                    <div class="col-6 text-end" style="border-top:  0.5px solid #dcdcdc !important; border-bottom: 0.5px solid black !important;">
-                        <strong>
+                        </td>
+                        <td class="text-end" style="border-top: 0.5px solid black;">
                             <span>
-                                <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                           </span>
-                        </strong>
-                    </div>
-                </div>
+                                <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
+                        </td>
+                    </tr>
+                    <tr t-if="discount!=0">
+                        <td style="border-top: 0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-if="lang=='en_US'">Conditions</t>
+                                <t t-if="lang!='en_US'">Konditionen</t>
+                                <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%</span>
+                        </td>
+                        <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
+                        </td>
+                    </tr>
+                    <tr t-if="discount!=0">
+                        <td style="border-top: 0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-if="lang=='en_US'">Subtotal</t>
+                                <t t-if="lang!='en_US'">Zwischensumme</t>
+                            </span>
+                        </td>
+                        <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
+                        </td>
+                    </tr>
+                    <tr t-if="doc.amount_tax>0">
+                        <td style="border-top: 0.5px solid #dcdcdc;">
+                            <span>20% Mwst.</span>
+                        </td>
+                        <td class="text-end" style="border-top: 0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <strong>
+                                <span>
+                                    <t t-if="lang=='en_US'">Total</t>
+                                    <t t-if="lang!='en_US'">Gesamtsumme</t>
+                                </span>
+                            </strong>
+                        </td>
+                        <td class="text-end" style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <strong>
+                                <span>
+                                    <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                                </span>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
                 <br/>
                 <br/>
-               
                 <div class="row pb-2">
                     <div class="col-2">
                         <p>
