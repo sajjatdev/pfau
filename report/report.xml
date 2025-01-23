@@ -255,77 +255,81 @@
                 </table>
                 <br/>
                 <br/>
-                <table class="table" style="border-bottom: 0.5px solid #dcdcdc !important;">
-                    <t t-set="discount"
+                <t t-set="discount"
                        t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
-                    <t t-set="total_price"
+                <t t-set="total_price"
                        t-value="sum(line.price_subtotal for line in doc.order_line if line.price_subtotal and line.price_subtotal &gt; 0)"/>
-                    <tr style="height: 20px;">
-                        <td style="padding:0 0 0 10px; margin:0px; border-top: 0.5px solid #dcdcdc; vertical-align: middle;">
-                            <t t-if="lang=='en_US'">Net Total</t>
-                            <t t-if="lang!='en_US'">Summe netto</t>
+                
+                <table class="table-sm o_main_table table-borderless" style="width:100%;">
+                    <tr>
+                        <td style="border-top: 0.5px solid black;">
+                            <span>
+                                <t t-if="lang=='en_US'">Net Total</t>
+                                <t t-if="lang!='en_US'">Summe netto</t>
+                            </span>
                         </td>
-                        <td class="text-end"
-                            style="padding:0 10px 0 0; margin:0px; border-top: 0.5px solid #dcdcdc; vertical-align: middle;">
-                            <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                        </td>
-                    </tr>
-                    <tr t-if="discount!=0" style="height: 20px;">
-                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
-                            <t t-if="lang=='en_US'">Conditions</t>
-                            <t t-if="lang!='en_US'">Konditionen</t>
-                            <![CDATA[&nbsp;]]>
-                            <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
-                        </td>
-                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                            <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
-                            €
+                        <td class="text-end" style="border-top: 0.5px solid black;">
+                            <span>
+                                <t t-esc="'{:,.2f}'.format(total_price).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
                         </td>
                     </tr>
-                    <tr t-if="discount!=0" style="height: 20px;">
-                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
-                            <t t-if="lang=='en_US'">Subtotal</t>
-                            <t t-if="lang!='en_US'">Zwischensumme</t>
+                    <tr t-if="discount!=0">
+                        <td style="border-top: 0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-if="lang=='en_US'">Conditions</t>
+                                <t t-if="lang!='en_US'">Konditionen</t>
+                                <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%</span>
                         </td>
-                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                            <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
-                            €
+                        <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
                         </td>
                     </tr>
-                    <tr style="height: 20px;">
-                        <t t-if="doc.amount_tax &gt; 0">
-                            <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;">
-                                <div t-if="'P' not in doc.name">
-                                    <t t-set="taxes" t-value="doc.show_tax()"/>
-                                    <t t-foreach="taxes['tax_groups']" t-as="tax_des">
-                                        <span t-esc="tax_des"/>
-                                    </t>
-                                </div>
-                                <span t-if="'P' in doc.name">
-                                    <t t-if="lang=='en_US'">Taxes</t>
-                                    <t t-if="lang != 'en_US'">Steuern</t>
+                    <tr t-if="discount!=0">
+                        <td style="border-top: 0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-if="lang=='en_US'">Subtotal</t>
+                                <t t-if="lang!='en_US'">Zwischensumme</t>
+                            </span>
+                        </td>
+                        <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
+                        </td>
+                    </tr>
+                    <tr t-if="doc.amount_tax>0">
+                        <td style="border-top: 0.5px solid #dcdcdc;">
+                            <span>20% Mwst.</span>
+                        </td>
+                        <td class="text-end" style="border-top: 0.5px solid #dcdcdc;">
+                            <span>
+                                <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <strong>
+                                <span>
+                                    <t t-if="lang=='en_US'">Total</t>
+                                    <t t-if="lang!='en_US'">Gesamtsumme</t>
                                 </span>
-                            </td>
-                            <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;">
-                                <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/>
-                                €
-                            </td>
-                        </t>
-                    </tr>
-                    <tr style="height: 20px;">
-                        <td style="padding:0 0 0 10px; margin:0px; vertical-align: middle;" width="10">
-                            <b>
-                                <t t-if="lang=='en_US'">Total</t>
-                                <t t-if="lang!='en_US'">Gesamtsumme</t>
-                            </b>
+                            </strong>
                         </td>
-                        <td class="text-end" style="padding:0 10px 0 0; margin:0px; vertical-align: middle;" width="10">
-                            <b>
-                                <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
-                            </b>
+                        <td class="text-end" style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <strong>
+                                <span>
+                                    <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
+                                </span>
+                            </strong>
                         </td>
                     </tr>
                 </table>
+                <br/>
+                <br/>
                 <div t-if="'P' not in doc.name">
                     <br/>
                     <div style="text-align:justify;">
