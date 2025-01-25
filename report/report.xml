@@ -25,7 +25,7 @@
                                 <t t-if="'P' not in doc.name">AUFTRAGSBESTÄTIGUNG</t>
                                 <t t-if="'P' in doc.name">PURCHASE ORDER</t>
                             </t>
-                            <br/>N .:
+                            <br/>N.:
                             <span t-field="o.name"/>
 
                         </span>
@@ -38,7 +38,7 @@
                                 <t t-if="'P' not in doc.name">OFFERT</t>
                                 <t t-if="'P' in doc.name">PURCHASE ORDER</t>
                             </t>
-                            <br/>N .:
+                            <br/>N.:
                             <span t-field="doc.name"/>
 
                         </span>
