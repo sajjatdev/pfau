@@ -106,13 +106,22 @@ class InheritStockRule(models.Model):
                                                             procurement.product_qty, procurement.product_uom,
                                                             company_id,
                                                             procurement.values, po_line)
+
                     # Add custom code --------------------------------------------
                     sale_order_data = self.env['sale.order'].search([('name', '=', procurement.origin)])
                     matching_order_lines = sale_order_data.order_line.filtered(
-                        lambda line: line.product_id.id == procurement.product_id.id)
-                    vals['price_unit'] = matching_order_lines.price_unit
+                        lambda line: line.product_id.id == procurement.product_id.id
+                        
+                    )
+                    
+                    vals["price_unit"] = (
+                        sum(item.price_unit for item in matching_order_lines)
+                        if len(matching_order_lines) > 1
+                        else matching_order_lines.price_unit
+                    )
                     vals['discount'] = supplier.partner_id.supplier_discount
                     # END -------------------------------------------------
+
                     po_line.sudo().write(vals)
                 else:
                     if float_compare(procurement.product_qty, 0,
@@ -134,7 +143,12 @@ class InheritStockRule(models.Model):
                     for index in range(len(po_line_values)):
                         matching_order_lines = sale_order_data.order_line.filtered(
                             lambda line: line.product_id.id == po_line_values[index]['product_id'])
-                        po_line_values[index]['price_unit'] = matching_order_lines.price_unit
+
+                        po_line_values[index]["price_unit"] = (
+                            sum(item.price_unit for item in matching_order_lines)
+                            if len(matching_order_lines) > 1
+                            else matching_order_lines.price_unit
+                        )
                         po_line_values[index]['discount'] = supplier.partner_id.supplier_discount
 
                     # END ---------------------------

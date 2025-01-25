@@ -39,7 +39,7 @@
                     </strong>
                 </div>
                 <div class="row information_block">
-                    <div class="col-5 title">
+                    <div class="col-5 title" style="padding-right:20px;">
                         <strong>
                             <t t-if="doc.partner_id">
                                 <span t-field="doc.partner_id.name"/>
