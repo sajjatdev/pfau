@@ -9,7 +9,7 @@
         <xpath expr="//div[contains(@t-attf-class, 'din_page invoice_note')]" position="replace">
             <t t-set="doc" t-value="o.with_context({'lang':o.partner_id.lang})"/>
             <t t-set="lang" t-value="o.partner_id.lang"/>
-            <div t-if="'/' not in doc.name and  'I' not in doc.name"
+            <div t-if="'WH/OUT/' not in doc.name and  '/' not in doc.name and  'I' not in doc.name"
                     t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
                     t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
                     t-att-data-oe-model="doc and doc._name"
@@ -17,8 +17,14 @@
                 <div class="title_source_div">
                     <strong class="title_source">
                         <span t-if="doc.state not in ['draft', 'sent']">
-                            <t t-if="lang=='en_US'">ORDER CONFIRMATION</t>
-                            <t t-if="lang!='en_US'">AUFTRAGSBESTÄTIGUNG</t>
+                            <t t-if="lang=='en_US'">
+                                <t t-if="'P' not in doc.name">ORDER CONFIRMATION</t>
+                                <t t-if="'P' in doc.name">PURCHASE ORDER</t>
+                            </t>
+                            <t t-if="lang!='en_US'">
+                                <t t-if="'P' not in doc.name">AUFTRAGSBESTÄTIGUNG</t>
+                                <t t-if="'P' in doc.name">PURCHASE ORDER</t>
+                            </t>
                             <br/>N .:
                             <span t-field="o.name"/>
 
@@ -215,8 +221,11 @@
                     </thead>
                     <tbody class="sale_tbody">
                         <t t-set="current_subtotal" t-value="0"/>
+                        <t t-set="index" t-value="0"/>
                         <t t-foreach="doc.order_line" t-as="line">
-                            <tr t-if="line.price_unit &gt;= 0 " style="border-bottom: 0.5px solid #dcdcdc;">
+                            <!-- Index Set -->
+                            <t t-set="index" t-value="index+1"/>
+                            <tr t-if="line.price_unit &gt;= 0 " t-attf-style="#{'' if index == len(doc.order_line) else 'border-top: 0.5px solid #dcdcdc;'}">
                                 <td t-if="'P' not in doc.name" style="vertical-align: top;">
                                     <strong>
                                         <span t-if="'position' in line" t-field="line.position"/>
@@ -224,7 +233,10 @@
                                 </td>
                                 <td style="vertical-align: top;">
                                     <span t-field="line.product_id.name"/>
-                                    <span t-if="'S' in doc.name " t-field="line.product_id.description_sale"/>
+                                    <t t-if="'S' in doc.name ">
+                                        <br/>
+                                        <span  t-field="line.product_id.description_sale"/>
+                                    </t>
                                     <br/>
                                     <t t-foreach="line.product_id.product_template_attribute_value_ids"
                                        t-as="attribute">
@@ -246,7 +258,7 @@
                                 <td t-if="display_discount" class="text-center" style="vertical-align: middle;">
                                     <span t-field="line.discount"/>%
                                 </td>
-                                <td class="text-center" style="vertical-align: middle;">
+                                <td class="text-end" style="vertical-align: middle;">
                                     <span t-field="line.price_subtotal"/>
                                 </td>
                             </tr>
@@ -446,8 +458,7 @@
                         </div>
                         <div class="col-10">
                             <p>
-                                <t t-if="lang=='en_US'">The offer is valid until</t>
-                                <t t-if="lang!='en_US'">Das Angebot ist gültig bis</t>
+                                Das Angebot ist gültig bis
                                 <t t-if="'validity_date' in doc and doc.validity_date" t-esc="doc.validity_date"/>
                             </p>
                         </div>
@@ -483,10 +494,8 @@
                                     </u>
                                 </strong>
                                 <br/>
-                                <t t-if="doc.partner_invoice_id.parent_id">
-                                   <span t-field="doc.partner_invoice_id.parent_id.name"/>
-                                    <br/> 
-                                </t>
+                                <span t-field="doc.partner_shipping_id.name"/>
+                                <br/>
                                 <t t-esc="doc.partner_invoice_id.street"/>
                                 <br/>
                                 <t t-esc="doc.partner_invoice_id.city"/>,
@@ -539,14 +548,14 @@
                         <t t-esc="doc.user_id.name"/>
                     </div>
                 </div>
-                <!-- Purchase Order Delivery Address -->
+                <!-- Purchase Order Further Information -->
                 <div t-if="'P' in doc.name and doc.other_delivery==True" class="row">
                     <div class="col-6">
                         <p>
                             <strong>
                                 <u>
-                                    <t t-if="lang=='en_US'">Delivery Address</t>
-                                    <t t-if="lang!='en_US'">Lieferadresse</t>
+                                    <t t-if="lang=='en_US'">Further Information</t>
+                                    <t t-if="lang!='en_US'">Weitere Informationen</t>
                                 </u>
                             </strong>
                             <br/>
@@ -576,7 +585,7 @@
                 </div>
             </div>
             <!-- Invoice Report -->
-            <div t-if="'I' in doc.name" t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
+            <div t-if="'WH/OUT/' not in doc.name and '/' in doc.name or 'I' in doc.name" t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
                     t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
                     t-att-data-oe-model="doc and doc._name"
                     t-att-data-oe-id="doc and doc.id">
@@ -714,7 +723,7 @@
                                 </strong>
                                 <p class="m-0" t-field="doc.invoice_origin"/>
                             </div>
-                            <div class="col-auto">
+                            <div t-if="o.ref" class="col-auto">
                                 <strong>
                                     <t t-if="lang=='en_US'">Reference</t>
                                     <t t-if="lang!='en_US'">Referenz</t>
@@ -767,8 +776,11 @@
                     </thead>
                     <tbody class="sale_tbody">
                         <t t-set="current_subtotal" t-value="0"/>
-                        <t t-foreach="doc.invoice_line_ids" t-as="line">
-                            <tr t-if="line.price_unit &gt;= 0 " style="border-bottom: 0.5px solid #dcdcdc;">
+                        <t t-set="index" t-value="0"/>
+                        <t t-foreach="doc.invoice_line_ids" t-as="line" t-index="index">
+                            <!-- Index add -->
+                            <t t-set="index" t-value="index+1"/>
+                            <tr t-if="line.price_unit &gt; 0" t-attf-style="#{''if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid #dcdcdc;'} ">
                                 <td style="vertical-align: top;">
                                     <strong>
                                         <span t-if="'position' in line" t-field="line.position"/>
@@ -797,7 +809,7 @@
                                 <td t-if="display_discount" class="text-center" style="vertical-align: middle;">
                                     <span t-field="line.discount"/>%
                                 </td>
-                                <td class="text-center" style="vertical-align: middle;">
+                                <td class="text-end" style="vertical-align: middle;">
                                     <span t-field="line.price_subtotal"/>
                                 </td>
                             </tr>
@@ -902,6 +914,13 @@
                     </div>
                 </div>
             </div>
+
+            <div t-if="'WH/OUT/' in doc.name" t-attf-class="din_page quotation-page invoice_note article o_company_#{company.id}_layout {{'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  ''}} #{'din_page_pdf' if report_type == 'pdf' else ''}"
+                    t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+                    t-att-data-oe-model="doc and doc._name"
+                    t-att-data-oe-id="doc and doc.id">
+                        <t t-out="0"/>
+                    </div>
         </xpath>
     </template>
 </odoo>
