@@ -225,7 +225,7 @@
                         <t t-foreach="doc.order_line" t-as="line">
                             <!-- Index Set -->
                             <t t-set="index" t-value="index+1"/>
-                            <tr t-if="line.price_unit &gt;= 0 " t-attf-style="#{'' if index == len(doc.order_line) else 'border-top: 0.5px solid #dcdcdc;'}">
+                            <tr t-if="line.price_unit &gt; 0 " t-attf-style="#{'' if index == len(doc.order_line) else 'border-top: 0.5px solid #dcdcdc;'}">
                                 <td t-if="'P' not in doc.name" style="vertical-align: top;">
                                     <strong>
                                         <span t-if="'position' in line" t-field="line.position"/>
