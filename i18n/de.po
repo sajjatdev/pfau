@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0+e\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-12 14:59+0000\n"
-"PO-Revision-Date: 2025-01-12 14:59+0000\n"
+"POT-Creation-Date: 2025-01-26 07:29+0000\n"
+"PO-Revision-Date: 2025-01-26 07:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,129 +16,447 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+#. odoo-python
+#: code:addons/pfau/models/inherit_sale_order.py:0
+#, python-format
 msgid ""
-", Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und "
-"rechtzeitig beliefert werden. Für verspätete Lieferungen können wir nicht "
-"verantwortlich gemacht werden."
-msgstr ", Each delivery is subject to us being properly and timely supplied ourselves. We cannot be held responsible for delayed deliveries."
-
-#. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid ""
-",jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst richtig und rechtzeitig beliefert werden. Für verspätete\n"
-"                            Lieferungen können wir nicht verantwortlich gemacht werden. Sobald die Ware in unserem Lager eingetroffen ist, werden\n"
-"                            wir uns umgehend mit lhnen in Verbindung setzten, um einen Liefer/Auftragsklarheit zu vereinbaren. Die Lieferzeit beginnt\n"
-"                            mit Auftragsklarheit und dem Eintreffen einer vereinbarten Anzahlung. Bei Selbtabholung ist die bestellte Ware innerhalb\n"
-"                            von 7 Tagen von unserem Lager abzuholen. Bei verspäteter Abholung fallen Lagerkosten von €6,00 inkl. Mwst. pro Tag an."
+" We kindly ask for confirmation of the order confirmation under the agreed "
+"conditions and for return."
 msgstr ""
-", Each delivery is subject to us being properly and timely supplied ourselves. We cannot be held responsible for delayed\n"
-"                            deliveries. Once the goods have arrived at our warehouse, we will contact you immediately to arrange delivery/order clarification.\n"
-"                            The delivery time begins with order clarification and receipt of an agreed advance payment. For self-collection, the ordered goods\n"
-"                            must be collected from our warehouse within 7 days. For delayed collection, storage costs of €6.00 including VAT per day will apply."
+" Wir bitten um Bestätigung der Auftragsbestätigung im Rahmen der vereinbarten Frist "
+"Bedingungen und für die Rückgabe."
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "<b>Gesamtsumme</b>"
-msgstr "<b>Total</b>"
+msgid "20% Tax."
+msgstr "20 % Steuer."
+
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "<strong style=\"padding-right:30px;\">Gültigkeit:</strong>"
-msgstr "<strong style=\"padding-right:30px;\">Validity:</strong>"
+msgid "<span>VAT</span>:"
+msgstr "MwSt"
 
 #. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "<strong style=\"padding-right:30px;\">Lieferung:</strong>"
-msgstr "<strong style=\"padding-right:30px;\">Delivery:</strong>"
-
-#. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "<strong style=\"padding-right:30px;\">Lieferzeit:</strong>"
-msgstr "<strong style=\"padding-right:30px;\">Delivery Time:</strong>"
-
-#. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "<strong style=\"padding-right:30px;\">Zahlungsziel:</strong>"
-msgstr "<strong style=\"padding-right:30px;\">Payment Terms:</strong>"
-
-#. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+#. odoo-python
+#: code:addons/pfau/models/inherit_sale_order.py:0
+#, python-format
 msgid ""
-"<strong>\n"
-"                                <u>Lieferadresse</u>\n"
-"                            </strong>"
-msgstr "<strong>\n<u>Delivery Address</u>\n</strong>"
+"All deliveries are subject to our Terms and Conditions, available at "
+"agb.pfau1010.com. We hope that our offer meets your expectations. You can "
+"reach us during our business hours at 01 535 40 75 or via email at "
+"office@pfau1010.com."
+msgstr ""
+"Alle Lieferungen unterliegen unseren Allgemeinen Geschäftsbedingungen, verfügbar unter "
+"agb.pfau1010.com. Wir hoffen, dass unser Angebot Ihren Erwartungen entspricht. Du kannst "
+"erreichen Sie uns während unserer Geschäftszeiten unter 01 535 40 75 oder per E-Mail unter "
+"office@pfau1010.com."
 
 #. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+#. odoo-python
+#: code:addons/pfau/models/inherit_sale_order.py:0
+#, python-format
 msgid ""
-"<strong>\n"
-"                                <u>Rechungsadresse</u>\n"
-"                            </strong>"
-msgstr "<strong>\n<u>Billing Address</u>\n</strong>"
-
-#. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid ""
-"AUFTRAGSBESTÄTIGUNG\n"
-"                            <br/>N .:"
-msgstr "ORDER CONFIRMATION\n<br/>No.:"
-
-#. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid ""
-"Ansprechpartner\n"
-"                                    <br/>"
-msgstr "Contact Person\n<br/>"
+"Any product images are representations of the offered model, but not "
+"necessarily the chosen variant. Prices are in euros, per unit excluding VAT,"
+" valid for the offered quantity."
+msgstr ""
+"Etwaige Produktbilder stellen Darstellungen des angebotenen Modells dar, "
+"jedoch nicht unbedingt die gewählte Variante. Die Preise verstehen sich in "
+"Euro pro Einheit ohne Mehrwertsteuer, gültig für die angebotene Menge."
 
 #. module: pfau
 #: model:ir.model,name:pfau.model_product_attribute_value
 msgid "Attribute Value"
-msgstr "Attribute Value"
+msgstr "Attributwert"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid ""
-"Bei Zahlungszielüberschreitung werden 1,5% Monat verrechnet.Die Ware bleibt "
-"bis zur vollständigen Bezahlung in unserem Eigentum."
-msgstr "A 1.5% monthly fee will be charged for overdue payments. The goods remain our property until fully paid."
+msgid "Billing Address"
+msgstr "Rechnungsadresse"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Cancelled Credit Note"
+msgstr "Stornierte Gutschrift"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Cancelled Invoice"
+msgstr "Stornierte Rechnung"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Conditions"
+msgstr "Bedingungen"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Contact Person"
+msgstr "Ansprechpartner"
 
 #. module: pfau
 #: model:ir.model.fields,field_description:pfau.field_sale_order__cover_note_quot
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
 msgid "Cover Note Quotation"
-msgstr "Cover Note Quotation"
+msgstr "Zitat des Begleitschreibens"
 
 #. module: pfau
 #: model:ir.model.fields,field_description:pfau.field_sale_order__cover_note_sale
 msgid "Cover Note Sale"
-msgstr "Cover Note Sale"
+msgstr "Begleitscheinverkauf"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
 msgid "Cover Note Sale Order"
-msgstr "Cover Note Sale Order"
-
-#. module: pfau
-#: model:ir.model.fields,field_description:pfau.field_product_attribute__custom_attr_name
-msgid "Custom Attribute Name"
-msgstr "Custom Attribute Name"
+msgstr "Begleitschreiben-Verkaufsauftrag"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "Das Angebot ist gültig bis"
-msgstr "The offer is valid until"
+msgid "Created Date"
+msgstr "Datum Erstellt"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid ""
-"Datum\n"
-"                                    <br/>"
-msgstr "Date\n<br/>"
+msgid "Credit Note"
+msgstr "Gutschrift"
+
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Date"
+msgstr "Datum"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Date, Name, and Signature"
+msgstr "Datum, Name und Unterschrift"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_purchase_order__delivery_address
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Delivery Address"
+msgstr "Lieferadresse"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Delivery Date"
+msgstr "Delivery Date"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
 msgid "Delivery Term Quotation"
-msgstr "Delivery Term Quotation"
+msgstr "Angebot zur Lieferfrist"
 
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Delivery Term Sale Order"
+msgstr "Lieferfrist, Verkaufsauftrag"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_sale_order__delivery_term_quot
+#: model:ir.model.fields,field_description:pfau.field_sale_order__delivery_term_sale
+msgid "Delivery Terms"
+msgstr "Lieferbedingungen"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Delivery Time:"
+msgstr "Lieferzeit:"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Delivery Weeks Quotation"
+msgstr "Angebot für Lieferwochen"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Delivery Weeks Sale Order"
+msgstr "Lieferwochen-Ausverkaufsbestellung"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Delivery:"
+msgstr "Lieferung:"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Disc."
+msgstr "Scheibe."
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Draft Credit Note"
+msgstr "Entwurf einer Gutschrift"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Draft Invoice"
+msgstr "Rechnungsentwurf"
+
+#. module: pfau
+#. odoo-python
+#: code:addons/pfau/models/inherit_sale_order.py:0
+#, python-format
+msgid ""
+"Each delivery is subject to the condition that we ourselves are delivered "
+"correctly and on time. We cannot be held responsible for delayed deliveries."
+msgstr ""
+"Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst beliefert werden "
+"korrekt und pünktlich. Wir können nicht für verspätete Lieferungen verantwortlich gemacht werden."
+
+#. module: pfau
+#. odoo-python
+#: code:addons/pfau/models/inherit_sale_order.py:0
+#, python-format
+msgid ""
+"Each delivery is subject to the condition that we ourselves are delivered "
+"correctly and on time. We cannot be held responsible for delayed deliveries."
+" Once the goods have arrived in our warehouse, we will promptly contact you "
+"to arrange a delivery/order confirmation. The delivery time begins upon "
+"order confirmation and the arrival of an agreed deposit. In case of self-"
+"collection, the ordered goods must be picked up from our warehouse within 7 "
+"days. In case of delayed pick-up, storage costs of €6.00 including VAT per "
+"day will apply."
+msgstr ""
+"Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst beliefert werden "
+"korrekt und pünktlich. Wir können nicht für verspätete Lieferungen verantwortlich gemacht werden."
+" Sobald die Ware in unserem Lager eingetroffen ist, werden wir uns umgehend mit Ihnen in Verbindung setzen "
+"um eine Liefer-/Auftragsbestätigung zu veranlassen. Die Lieferzeit beginnt am "
+"Auftragsbestätigung und Eingang einer vereinbarten Anzahlung. Im Falle einer Selbst-"
+"Bei Abholung muss die bestellte Ware innerhalb von 7 Tagen in unserem Lager abgeholt werden "
+"Tage. Bei verspäteter Abholung fallen Lagerkosten in Höhe von 6,00 € inkl. MwSt. pro Stück an "
+"Tag gilt."
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Email"
+msgstr "E-Mail"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_sale_order__delivery_time_quot
+#: model:ir.model.fields,field_description:pfau.field_sale_order__delivery_time_sale
+msgid "Expected Delivery Weeks"
+msgstr "Voraussichtliche Lieferwoche"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Further Information"
+msgstr "Further Information"
+
+#. module: pfau
+#. odoo-python
+#: code:addons/pfau/models/inherit_sale_order.py:0
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+#, python-format
+msgid ""
+"If the payment term is exceeded, 1.5% per month will be charged. The goods "
+"remain our property until full payment is received."
+msgstr ""
+"Bei Überschreitung des Zahlungsziels werden 1,5 % pro Monat berechnet. Die Ware "
+"bleiben bis zur vollständigen Bezahlung unser Eigentum."
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Invoice"
+msgstr "Rechnung"
+
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_account_move_line
+msgid "Journal Item"
+msgstr "Buchungszeile"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Net Total"
+msgstr "Nettosumme"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "ORDER CONFIRMATION"
+msgstr "BESTELLBESTÄTIGUNG"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Order Date"
+msgstr "Bestelldatum"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_purchase_order__other_delivery
+msgid "Other Delivery Address"
+msgstr "Andere Lieferadresse"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Our Order Reference"
+msgstr "Unsere Bestellreferenz"
+
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "PURCHASE ORDER"
+msgstr "AUFTRAGSBESTÄTIGUNG"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Payment Date"
+msgstr "Zahlungsdatum"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Payment Terms:"
+msgstr "Zahlungsbedingungen:"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Phone"
+msgstr "Telefon"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_account_move_line__position
+#: model:ir.model.fields,field_description:pfau.field_purchase_order_line__position
+#: model:ir.model.fields,field_description:pfau.field_sale_order_line__position
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Position"
+msgstr ""
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Price/Unit"
+msgstr "Preis/Einheit"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Product"
+msgstr "Produkt"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_product_attribute
+msgid "Product Attribute"
+msgstr "Produktattribut"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_purchase_order
+msgid "Purchase Order"
+msgstr "Auftragsbestätigung"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Bestellzeile"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "QUOTATION"
+msgstr "Zitat"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Reference"
+msgstr "Referenz"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Report"
+msgstr ""
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_sale_order__sale_order_subject
+#: model:ir.model.fields,field_description:pfau.field_sale_order__sale_subject
+msgid "Sale Default Subject For Quotation"
+msgstr ""
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Sale Person"
+msgstr "Verkäuferin"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_sale_order
+msgid "Sales Order"
+msgstr "Verkaufsauftrag"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Verkaufsauftragszeile"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Sales Person"
+msgstr "Verkäufer"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Source"
+msgstr "Quelle"
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_stock_rule
+msgid "Stock Rule"
+msgstr "Bestandsregel"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Subject For Quotation"
+msgstr ""
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
+msgid "Subject For Sale Order"
+msgstr ""
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_res_partner__supplier_discount
+#: model:ir.model.fields,field_description:pfau.field_res_users__supplier_discount
+msgid "Supplier Discount"
+msgstr "Lieferantenrabatt"
+
+#. module: pfau
+#. odoo-python
+#: code:addons/pfau/models/inherit_stock_rule.py:0
+#, python-format
+msgid ""
+"There is no matching vendor price to generate the purchase order for product"
+" %s (no vendor defined, minimum quantity not reached, dates not valid, ...)."
+" Go on the product form and complete the list of vendors."
+msgstr ""
+"Es gibt keinen passenden Lieferantenpreis, um die Bestellung für das Produkt zu generieren"
+" %s (Kein Lieferant definiert, Mindestmenge nicht erreicht, Termine ungültig, ...)."
+" Gehen Sie zum Produktformular und füllen Sie die Liste der Anbieter aus."
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Total"
+msgstr "Gesamt"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Validity:"
+msgstr "Gültigkeit:"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Vendor Credit Note"
+msgstr "Kreditorengutschrift"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.purchase_order_inherit_pfau
+msgid "Write delivery address"
+msgstr "Lieferadresse angeben"

@@ -1,4 +1,4 @@
-from odoo import api,fields,models
+from odoo import api,fields,models,_
 
 class InheritSaleOrder(models.Model):
     _inherit = "sale.order"
@@ -84,4 +84,30 @@ class InheritSaleOrder(models.Model):
         # Return a summary of taxes and total price
         return {"tax_groups": tax_summary, "total_price": total_price}
 
+    def get_note(self):
+        return _(
+            "Any product images are representations of the offered model, but not necessarily the chosen variant. Prices are in euros, per unit excluding VAT, valid for the offered quantity."
+        )
 
+    def get_text_delivery_time_quot(self):
+        return _(
+            "Each delivery is subject to the condition that we ourselves are delivered correctly and on time. We cannot be held responsible for delayed deliveries."
+        )
+    def get_text_delivery_time_sale(self):
+        return _(
+            "Each delivery is subject to the condition that we ourselves are delivered correctly and on time. We cannot be held responsible for delayed deliveries. Once the goods have arrived in our warehouse, we will promptly contact you to arrange a delivery/order confirmation. The delivery time begins upon order confirmation and the arrival of an agreed deposit. In case of self-collection, the ordered goods must be picked up from our warehouse within 7 days. In case of delayed pick-up, storage costs of €6.00 including VAT per day will apply."
+        )
+
+    def get_text_payment_term_note(self):
+        return _(
+            "If the payment term is exceeded, 1.5% per month will be charged. The goods remain our property until full payment is received."
+        )
+
+    def get_text_note_1(self):
+        return _(
+            "All deliveries are subject to our Terms and Conditions, available at agb.pfau1010.com. We hope that our offer meets your expectations. You can reach us during our business hours at 01 535 40 75 or via email at office@pfau1010.com."
+        )
+    def get_text_note_2(self):
+        return _(
+            " We kindly ask for confirmation of the order confirmation under the agreed conditions and for return."
+        )
