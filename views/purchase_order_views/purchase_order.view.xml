@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='currency_id']" position="after">
                     <field name="other_delivery" />
-                    <field  name="delivery_address" placeholder="Write delivery address" invisible="not other_delivery" />
+                    <field  name="delivery_address" placeholder="Write further information" invisible="not other_delivery" />
                 </xpath>
         </field>
         </record>
