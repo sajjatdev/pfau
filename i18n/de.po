@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-26 07:29+0000\n"
-"PO-Revision-Date: 2025-01-26 07:29+0000\n"
+"POT-Creation-Date: 2025-01-26 08:54+0000\n"
+"PO-Revision-Date: 2025-01-26 08:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,14 +17,25 @@ msgstr ""
 
 #. module: pfau
 #. odoo-python
+#: code:addons/pfau/models/inherit_account_move.py:0
+#, python-format
+msgid ""
+" If the payment term is exceeded, 1.5% per month will be charged. The goods "
+"remain our property until full payment is received."
+msgstr ""
+" Bei Überschreitung des Zahlungsziels werden 1,5 % pro Monat berechnet. Die Ware "
+"bleiben bis zur vollständigen Bezahlung unser Eigentum."
+
+#. module: pfau
+#. odoo-python
 #: code:addons/pfau/models/inherit_sale_order.py:0
 #, python-format
 msgid ""
 " We kindly ask for confirmation of the order confirmation under the agreed "
 "conditions and for return."
 msgstr ""
-" Wir bitten um Bestätigung der Auftragsbestätigung im Rahmen der vereinbarten Frist "
-"Bedingungen und für die Rückgabe."
+" Wir bitten um Bestätigung der Auftragsbestätigung im Rahmen der "
+"vereinbarten Frist Bedingungen und für die Rückgabe."
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
@@ -34,8 +45,23 @@ msgstr "20 % Steuer."
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "<span>20% Mwst.</span>"
+msgstr ""
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "<span>VAT</span>:"
 msgstr "MwSt"
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "A note, whose content usually applies to the section or product above."
+msgstr ""
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "A section title"
+msgstr ""
 
 #. module: pfau
 #. odoo-python
@@ -47,9 +73,10 @@ msgid ""
 "reach us during our business hours at 01 535 40 75 or via email at "
 "office@pfau1010.com."
 msgstr ""
-"Alle Lieferungen unterliegen unseren Allgemeinen Geschäftsbedingungen, verfügbar unter "
-"agb.pfau1010.com. Wir hoffen, dass unser Angebot Ihren Erwartungen entspricht. Du kannst "
-"erreichen Sie uns während unserer Geschäftszeiten unter 01 535 40 75 oder per E-Mail unter "
+"Alle Lieferungen unterliegen unseren Allgemeinen Geschäftsbedingungen, "
+"verfügbar unter agb.pfau1010.com. Wir hoffen, dass unser Angebot Ihren "
+"Erwartungen entspricht. Du kannst erreichen Sie uns während unserer "
+"Geschäftszeiten unter 01 535 40 75 oder per E-Mail unter "
 "office@pfau1010.com."
 
 #. module: pfau
@@ -119,13 +146,22 @@ msgstr "Begleitschreiben-Verkaufsauftrag"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Created Date"
-msgstr "Datum Erstellt"
+msgstr "Create Date"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Credit Note"
 msgstr "Gutschrift"
 
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_product_attribute__custom_attr_name
+msgid "Custom Attribute Name"
+msgstr ""
+
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid "Das Angebot ist gültig bis"
+msgstr ""
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
@@ -146,7 +182,7 @@ msgstr "Lieferadresse"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Delivery Date"
-msgstr "Delivery Date"
+msgstr ""
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
@@ -207,8 +243,9 @@ msgid ""
 "Each delivery is subject to the condition that we ourselves are delivered "
 "correctly and on time. We cannot be held responsible for delayed deliveries."
 msgstr ""
-"Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst beliefert werden "
-"korrekt und pünktlich. Wir können nicht für verspätete Lieferungen verantwortlich gemacht werden."
+"Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst beliefert werden"
+" korrekt und pünktlich. Wir können nicht für verspätete Lieferungen "
+"verantwortlich gemacht werden."
 
 #. module: pfau
 #. odoo-python
@@ -224,14 +261,15 @@ msgid ""
 "days. In case of delayed pick-up, storage costs of €6.00 including VAT per "
 "day will apply."
 msgstr ""
-"Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst beliefert werden "
-"korrekt und pünktlich. Wir können nicht für verspätete Lieferungen verantwortlich gemacht werden."
-" Sobald die Ware in unserem Lager eingetroffen ist, werden wir uns umgehend mit Ihnen in Verbindung setzen "
-"um eine Liefer-/Auftragsbestätigung zu veranlassen. Die Lieferzeit beginnt am "
-"Auftragsbestätigung und Eingang einer vereinbarten Anzahlung. Im Falle einer Selbst-"
-"Bei Abholung muss die bestellte Ware innerhalb von 7 Tagen in unserem Lager abgeholt werden "
-"Tage. Bei verspäteter Abholung fallen Lagerkosten in Höhe von 6,00 € inkl. MwSt. pro Stück an "
-"Tag gilt."
+"Jede Lieferung erfolgt unter dem Vorbehalt, dass wir selbst beliefert werden"
+" korrekt und pünktlich. Wir können nicht für verspätete Lieferungen "
+"verantwortlich gemacht werden. Sobald die Ware in unserem Lager eingetroffen"
+" ist, werden wir uns umgehend mit Ihnen in Verbindung setzen um eine "
+"Liefer-/Auftragsbestätigung zu veranlassen. Die Lieferzeit beginnt am "
+"Auftragsbestätigung und Eingang einer vereinbarten Anzahlung. Im Falle einer"
+" Selbst-Bei Abholung muss die bestellte Ware innerhalb von 7 Tagen in "
+"unserem Lager abgeholt werden Tage. Bei verspäteter Abholung fallen "
+"Lagerkosten in Höhe von 6,00 € inkl. MwSt. pro Stück an Tag gilt."
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
@@ -247,25 +285,34 @@ msgstr "Voraussichtliche Lieferwoche"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Further Information"
-msgstr "Further Information"
+msgstr ""
 
 #. module: pfau
 #. odoo-python
 #: code:addons/pfau/models/inherit_sale_order.py:0
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 #, python-format
 msgid ""
 "If the payment term is exceeded, 1.5% per month will be charged. The goods "
 "remain our property until full payment is received."
 msgstr ""
-"Bei Überschreitung des Zahlungsziels werden 1,5 % pro Monat berechnet. Die Ware "
-"bleiben bis zur vollständigen Bezahlung unser Eigentum."
+"Bei Überschreitung des Zahlungsziels werden 1,5 % pro Monat berechnet. Die "
+"Ware bleiben bis zur vollständigen Bezahlung unser Eigentum."
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Invoice"
 msgstr "Rechnung"
 
+#. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_res_partner__is_vandor
+#: model:ir.model.fields,field_description:pfau.field_res_users__is_vandor
+msgid "Is Vandor"
+msgstr ""
+
+#. module: pfau
+#: model:ir.model,name:pfau.model_account_move
+msgid "Journal Entry"
+msgstr "Journalbuchung"
 
 #. module: pfau
 #: model:ir.model,name:pfau.model_account_move_line
@@ -297,6 +344,19 @@ msgstr "Andere Lieferadresse"
 msgid "Our Order Reference"
 msgstr "Unsere Bestellreferenz"
 
+#. module: pfau
+#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
+msgid ""
+"PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM GESTADE, 1010 VIENNA\n"
+"                            PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA\n"
+"                            RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW"
+msgstr ""
+"PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM\n"
+"                                GESTADE, 1010 VIENNA\n"
+"                                PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU\n"
+"                                10249006, FN 9447v HG VIENNA\n"
+"                                RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000\n"
+"                                1038 4774, BIC: RLNWATWW"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
@@ -332,6 +392,11 @@ msgid "Price/Unit"
 msgstr "Preis/Einheit"
 
 #. module: pfau
+#: model:ir.model.fields,field_description:pfau.field_product_attribute__attr_value
+msgid "Print On Quotation"
+msgstr ""
+
+#. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Product"
 msgstr "Produkt"
@@ -344,7 +409,7 @@ msgstr "Produktattribut"
 #. module: pfau
 #: model:ir.model,name:pfau.model_purchase_order
 msgid "Purchase Order"
-msgstr "Auftragsbestätigung"
+msgstr "Bestellung"
 
 #. module: pfau
 #: model:ir.model,name:pfau.model_purchase_order_line
@@ -420,7 +485,7 @@ msgstr ""
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Subtotal"
-msgstr "Subtotal"
+msgstr ""
 
 #. module: pfau
 #: model:ir.model.fields,field_description:pfau.field_res_partner__supplier_discount
@@ -437,9 +502,10 @@ msgid ""
 " %s (no vendor defined, minimum quantity not reached, dates not valid, ...)."
 " Go on the product form and complete the list of vendors."
 msgstr ""
-"Es gibt keinen passenden Lieferantenpreis, um die Bestellung für das Produkt zu generieren"
-" %s (Kein Lieferant definiert, Mindestmenge nicht erreicht, Termine ungültig, ...)."
-" Gehen Sie zum Produktformular und füllen Sie die Liste der Anbieter aus."
+"Es gibt keinen passenden Lieferantenpreis, um die Bestellung für das Produkt"
+" zu generieren %s (Kein Lieferant definiert, Mindestmenge nicht erreicht, "
+"Termine ungültig, ...). Gehen Sie zum Produktformular und füllen Sie die "
+"Liste der Anbieter aus."
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
