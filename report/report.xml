@@ -384,7 +384,7 @@
                                 </p>
                             </div>
                             <div class="col-9">
-                                <p>
+                                <p t-translation="off">
                                 Das Angebot ist gültig bis
                                     <t t-if="'validity_date' in doc and doc.validity_date" t-esc="doc.validity_date"/>
                                 </p>

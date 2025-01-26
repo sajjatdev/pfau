@@ -158,10 +158,6 @@ msgstr "Gutschrift"
 msgid "Custom Attribute Name"
 msgstr ""
 
-#. module: pfau
-#: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "Das Angebot ist gültig bis"
-msgstr "Das Angebot ist gültig bis"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
