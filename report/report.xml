@@ -209,6 +209,10 @@
                                                 <br/>
                                                 <span t-field="line.product_id.description_sale"/>
                                             </t>
+                                            <t t-if="'P' in doc.name">
+                                                <br/>
+                                                <span t-field="line.name"/> 
+                                            </t>
                                             <br/>
                                             <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="attribute">
                                                 <span t-field="attribute.display_name"/>
