@@ -197,7 +197,7 @@
                                 <t t-set="index" t-value="index+1"/>
                                 <!-- Regular Product Line -->
                                 <t t-if="not line.display_type">
-                                    <tr t-if="line.price_unit &gt; 0" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid #dcdcdc;'}">
+                                    <tr t-if="line.price_unit &gt;= 0" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid #dcdcdc;'}">
                                         <td t-if="'P' not in doc.name" style="vertical-align: top;">
                                             <strong>
                                                 <span t-if="'position' in line" t-field="line.position"/>
@@ -242,7 +242,7 @@
                                     </td>
                                     <t t-set="current_section" t-value="line"/>
                                     <t t-set="current_subtotal" t-value="0"/>
-                            </t>
+                                </t>
                                 <t t-elif="line.display_type == 'line_note'" >
                                     <td colspan="99" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid #dcdcdc;'}">
                                         <span t-field="line.name" t-options="{'widget': 'text'}">A note, whose content usually applies to the section or product above.</span>
@@ -663,7 +663,8 @@
                                 <!-- Index add -->
                                 <t t-set="index" t-value="index+1"/>
                                 <t t-if="line.display_type=='product'">
-                                    <tr t-if="line.price_unit &gt; 0" t-attf-style="#{''if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid #dcdcdc;'} ">
+                                    <tr t-if="line.price_unit &gt;= 0" t-attf-style="#{''if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid #dcdcdc;'} ">
+                                        
                                         <td style="vertical-align: top;">
                                             <strong>
                                                 <span t-if="'position' in line" t-field="line.position"/>
@@ -673,7 +674,7 @@
                                             <span t-field="line.product_id.name"/>
                                             <br/>
                                             <t t-foreach="line.product_id.product_template_attribute_value_ids"
-                                       t-as="attribute">
+                                                 t-as="attribute">
                                                 <span t-field="attribute.display_name"/>
                                                 <br/>
                                             </t>
@@ -703,7 +704,7 @@
                                     </td>
                                     <t t-set="current_section" t-value="line"/>
                                     <t t-set="current_subtotal" t-value="0"/>
-                            </t>
+                                </t>
                                 <t t-elif="line.display_type == 'line_note'" >
                                     <td colspan="99" t-attf-style="#{'' if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid #dcdcdc;'}">
                                         <span t-field="line.name" t-options="{'widget': 'text'}">A note, whose content usually applies to the section or product above.</span>

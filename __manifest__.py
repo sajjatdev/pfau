@@ -13,6 +13,7 @@
         "views/sale_views/inherit_attribute_form_view.xml",
         "views/partner_views/partner_view.xml",
         "views/purchase_order_views/purchase_order.view.xml",
+        'views/account_move/account_move_view.xml',
     ],
     "assets": {
         "web.report_assets_common": [
