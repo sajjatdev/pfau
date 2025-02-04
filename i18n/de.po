@@ -415,7 +415,7 @@ msgstr "Bestellzeile"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "QUOTATION"
-msgstr "Zitat"
+msgstr "OFFERT"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
@@ -430,7 +430,7 @@ msgstr "Referenz"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
 msgid "Report"
-msgstr ""
+msgstr "Report"
 
 #. module: pfau
 #: model:ir.model.fields,field_description:pfau.field_sale_order__sale_order_subject
