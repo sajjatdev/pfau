@@ -115,7 +115,7 @@ msgstr "Stornierte Rechnung"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Conditions"
-msgstr "Bedingungen"
+msgstr "Rabatt"
 
 #. module: pfau
 #: model:ir.model,name:pfau.model_res_partner
@@ -219,7 +219,7 @@ msgstr "Lieferung:"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Disc."
-msgstr "Scheibe."
+msgstr "Rabatt"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations

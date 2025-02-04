@@ -479,9 +479,9 @@
                     <div class="footer">
                         <div class="text-center">
                             <p class="footer-size" t-translation="true">
-                            PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM GESTADE, 1010 VIENNA
-                            PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA
-                            RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW
+                            PFAU OG, COMPANY FOR OBJECT FURNISHING AND INTERIOR DESIGN, AM GESTADE 2-4, 1010 VIENNA<br/>
+                            <span class="footer-smallersize"/>PHONE: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA<br/>
+                            RAIFFEISENLANDESBANK NÖ-WIEN ACCOUNT NUM. 10.384.774, BANK CODE 32000, IBAN AT 8832 000 000 1038 4774, BIC RLNWATWW</span>
                         </p>
                         </div>
                     </div>
@@ -803,9 +803,9 @@
                     <div class="footer">
                         <div class="text-center">
                             <p class="footer-size">
-                            PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM GESTADE, 1010 VIENNA
-                            PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA
-                            RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW
+                            PFAU OG, COMPANY FOR OBJECT FURNISHING AND INTERIOR DESIGN, AM GESTADE 2-4, 1010 VIENNA<br/>
+                            <span class="footer-smallersize"/>PHONE: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA<br/>
+                            RAIFFEISENLANDESBANK NÖ-WIEN ACCOUNT NUM. 10.384.774, BANK CODE 32000, IBAN AT 8832 000 000 1038 4774, BIC RLNWATWW</span>
                         </p>
                         </div>
                     </div>
