@@ -197,7 +197,7 @@
                                 <t t-set="index" t-value="index+1"/>
                                 <!-- Regular Product Line -->
                                 <t t-if="not line.display_type">
-                                    <tr t-if="line.price_unit &gt;= 0" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid #dcdcdc;'}">
+                                    <tr t-if="line.price_unit &gt;= 0" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid black;'}">
                                         <td t-if="'P' not in doc.name" style="vertical-align: top;">
                                             <strong>
                                                 <span t-if="'position' in line" t-field="line.position"/>
@@ -237,14 +237,14 @@
                                     </tr>
                                 </t>
                                 <t t-elif="line.display_type == 'line_section'">
-                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid #dcdcdc;'}">
+                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid black;'}">
                                         <span t-field="line.name" t-options="{'widget': 'text'}">A section title</span>
                                     </td>
                                     <t t-set="current_section" t-value="line"/>
                                     <t t-set="current_subtotal" t-value="0"/>
                                 </t>
                                 <t t-elif="line.display_type == 'line_note'" >
-                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid #dcdcdc;'}">
+                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.order_line) else 'border-bottom: 0.5px solid black;'}">
                                         <span t-field="line.name" t-options="{'widget': 'text'}">A note, whose content usually applies to the section or product above.</span>
                                     </td>
                                 </t>
@@ -269,43 +269,43 @@
                             </td>
                         </tr>
                         <tr t-if="discount!=0">
-                            <td style="border-top: 0.5px solid #dcdcdc;">
+                            <td style="border-top: 0.5px solid black;">
                                 <span t-translation="true">Conditions</span>
                                 <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%
                             </td>
-                            <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <td class="text-end" style="border-top:  0.5px solid black;">
                                 <span>
                                     <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                                 </span>
                             </td>
                         </tr>
                         <tr t-if="discount!=0">
-                            <td style="border-top: 0.5px solid #dcdcdc;">
+                            <td style="border-top: 0.5px solid black;">
                                 <span t-translation="true">Subtotal</span>
                             </td>
-                            <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <td class="text-end" style="border-top:  0.5px solid black;">
                                 <span>
                                     <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                                 </span>
                             </td>
                         </tr>
                         <tr t-if="doc.amount_tax>0">
-                            <td style="border-top: 0.5px solid #dcdcdc;">
+                            <td style="border-top: 0.5px solid black;">
                                 <span t-translation="true">20% Tax.</span>
                             </td>
-                            <td class="text-end" style="border-top: 0.5px solid #dcdcdc;">
+                            <td class="text-end" style="border-top: 0.5px solid black;">
                                 <span>
                                     <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                                 </span>
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <td style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">
                                 <strong>
                                     <span t-translation="true">Total</span>
                                 </strong>
                             </td>
-                            <td class="text-end" style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <td class="text-end" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">
                                 <strong>
                                     <span>
                                         <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
@@ -663,7 +663,7 @@
                                 <!-- Index add -->
                                 <t t-set="index" t-value="index+1"/>
                                 <t t-if="line.display_type=='product'">
-                                    <tr t-if="line.price_unit &gt;= 0" t-attf-style="#{''if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid #dcdcdc;'} ">
+                                    <tr t-if="line.price_unit &gt;= 0" t-attf-style="#{''if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid black;'} ">
                                         
                                         <td style="vertical-align: top;">
                                             <strong>
@@ -699,14 +699,14 @@
                                     </tr>
                                 </t>
                                 <t t-elif="line.display_type == 'line_section'">
-                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid #dcdcdc;'}">
+                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid black;'}">
                                         <span t-field="line.name" t-options="{'widget': 'text'}">A section title</span>
                                     </td>
                                     <t t-set="current_section" t-value="line"/>
                                     <t t-set="current_subtotal" t-value="0"/>
                                 </t>
                                 <t t-elif="line.display_type == 'line_note'" >
-                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid #dcdcdc;'}">
+                                    <td colspan="99" t-attf-style="#{'' if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid black;'}">
                                         <span t-field="line.name" t-options="{'widget': 'text'}">A note, whose content usually applies to the section or product above.</span>
                                     </td>
                                 </t>
@@ -733,48 +733,48 @@
                             </td>
                         </tr>
                         <tr t-if="discount!=0">
-                            <td style="border-top: 0.5px solid #dcdcdc;">
+                            <td style="border-top: 0.5px solid black;">
                                 <span>
                                     <span t-translation="true">Conditions</span>
                                     <span t-esc="discount if discount==0 else round(abs(discount)/total_price*100)"/>%</span>
                             </td>
-                            <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <td class="text-end" style="border-top:  0.5px solid black;">
                                 <span>
                                     <t t-esc="'{:,.2f}'.format(round(discount,2)).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                                 </span>
                             </td>
                         </tr>
                         <tr t-if="discount!=0">
-                            <td style="border-top: 0.5px solid #dcdcdc;">
+                            <td style="border-top: 0.5px solid black;">
                                 <span t-translation="true">
                                 Subtotal
                             </span>
                             </td>
-                            <td class="text-end" style="border-top:  0.5px solid #dcdcdc;">
+                            <td class="text-end" style="border-top:  0.5px solid black;">
                                 <span>
                                     <t t-esc="'{:,.2f}'.format(doc.amount_untaxed).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                                 </span>
                             </td>
                         </tr>
                         <tr t-if="doc.amount_tax>0">
-                            <td style="border-top: 0.5px solid #dcdcdc;">
+                            <td style="border-top: 0.5px solid black;">
                                 <span>20% Mwst.</span>
                             </td>
-                            <td class="text-end" style="border-top: 0.5px solid #dcdcdc;">
+                            <td class="text-end" style="border-top: 0.5px solid black;">
                                 <span>
                                     <t t-esc="'{:,.2f}'.format(doc.amount_tax).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
                                 </span>
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <td style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">
                                 <strong>
                                     <span t-translation="true">
                                     Total
                                 </span>
                                 </strong>
                             </td>
-                            <td class="text-end" style="border-top: 0.5px solid #dcdcdc; border-bottom: 0.5px solid black;">
+                            <td class="text-end" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">
                                 <strong>
                                     <span>
                                         <t t-esc="'{:,.2f}'.format(doc.amount_total).replace(',', 'X').replace('.', ',').replace('X', '.')"/> €
