@@ -145,8 +145,8 @@ msgstr "Begleitschreiben-Verkaufsauftrag"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
-msgid "Created Date"
-msgstr "Create Date"
+msgid "Date"
+msgstr "Datum"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations

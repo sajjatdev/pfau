@@ -57,7 +57,7 @@
                                 <div class="col-4 text-start">
                                     <!-- State-based labels -->
                                     <span t-if="doc.state in ['draft', 'sent']">
-                                        <t t-translation="true">Created Date</t>
+                                        <t t-translation="true">Date</t>
                                         <br/>
                                     </span>
                                     <span t-if="doc.state not in ['draft', 'sent']">
@@ -636,30 +636,30 @@
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;" t-translation="true">
                                 Product
                             </th>
-                                <th class="text-start"
+                                <th class="text-end"
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;"/>
-                                <th class="text-start"
+                                <th class="text-end"
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;" t-translation="true">
                                 Price/Unit
                             </th>
-                                <th class="text-start"
+                                <th class="text-end"
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;" t-translation="true">
                                 Quantity
                             </th>
-                                <th t-if="display_discount" class="text-start"
+                                <th t-if="display_discount" class="text-end"
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;" t-translation="true">
                                 Disc.
                             </th>
-                                <th class="text-start"
+                                <th class="text-end"
                                 style="border-top: 0px solid white !important; border-bottom: 1px solid black;" t-translation="true">
                                 Total
                             </th>
                             </tr>
                         </thead>
-                        <tbody class="sale_tbody">
+                        <tbody class="invoice_tbody">
                             <t t-set="current_subtotal" t-value="0"/>
                             <t t-set="index" t-value="0"/>
-                            <t t-foreach="doc.invoice_line_ids" t-as="line" t-index="index">
+                            <t t-foreach="doc.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)" t-as="line" t-index="index">
                                 <!-- Index add -->
                                 <t t-set="index" t-value="index+1"/>
                                 <t t-if="line.display_type=='product'">
@@ -671,7 +671,7 @@
                                             </strong>
                                         </td>
                                         <td style="vertical-align: top;">
-                                            <span t-field="line.product_id.name"/>
+                                            <span t-esc="line.name.split(']')[-1]  if ']' in line.name else line.name"/>
                                             <br/>
                                             <t t-foreach="line.product_id.product_template_attribute_value_ids"
                                                  t-as="attribute">
@@ -684,13 +684,13 @@
                                          t-att-src="image_data_uri(line.product_id.image_1920)" width="50px"
                                          height="50px"/>
                                         </td>
-                                        <td class="text-center" style="text-align: center; vertical-align: middle;">
+                                        <td class="text-end" style="text-align: center; vertical-align: middle;">
                                             <span t-field="line.price_unit"/>
                                         </td>
-                                        <td class="text-center" style="vertical-align: middle;">
+                                        <td class="text-end" style="vertical-align: middle;">
                                             <t t-esc="int(line.quantity)"/>
                                         </td>
-                                        <td t-if="display_discount" class="text-center" style="vertical-align: middle;">
+                                        <td t-if="display_discount" class="text-end" style="vertical-align: middle;">
                                             <span t-field="line.discount"/>%
                                         </td>
                                         <td class="text-end" style="vertical-align: middle;">
