@@ -343,16 +343,13 @@ msgstr "Unsere Bestellreferenz"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid ""
-"PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM GESTADE, 1010 VIENNA\n"
-"                            PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA\n"
+"PFAU OG, COMPANY FOR OBJECT FURNISHING AND INTERIOR DESIGN, AM GESTADE 2-4, 1010 VIENNA\n"
+"                            PHONE: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA\n"
 "                            RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW"
 msgstr ""
-"PFAU OG, COMPANY FOR OBJECT FURNISHINGS AND INTERIOR DESIGN, AM\n"
-"                                GESTADE, 1010 VIENNA\n"
-"                                PHONE: +43 -1- 535 40 75, FAX EXT. 9, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU\n"
-"                                10249006, FN 9447v HG VIENNA\n"
-"                                RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000\n"
-"                                1038 4774, BIC: RLNWATWW"
+"PFAU OG, GESELLSCHAT FÜR OBJEKTEINRICHTUNG & INNENRAUMGESTALTUNG, AM GESTADE 2-4, 1010 WIEN\n"
+"                                TELEFON: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA\n"
+"                                RAIFFEISENLANDESBANK NÖ-WIEN KTdoc.-NO.: 10.384.774, BLZ: 32000, IBAN: AT 8832 000 000 1038 4774, BIC: RLNWATWW"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
