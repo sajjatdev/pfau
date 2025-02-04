@@ -3,7 +3,7 @@
     <template id="inherit_sale_quotations" name="template_name" inherit_id="l10n_din5008.external_layout_din5008">
         <!-- logo position change -->
         <xpath expr="//table[contains(@class,'company_header')]" position="replace">
-            <img class="header-logo-image" src="/pfau/static/src/imags/company_logo.gif" height="110px" />
+            <img class="header-logo-image" src="/pfau/static/src/imags/company_logo.png" height="130px" />
         </xpath>
         <!--customer information block -->
         <xpath expr="//div[contains(@t-attf-class, 'din_page invoice_note')]" position="replace">
