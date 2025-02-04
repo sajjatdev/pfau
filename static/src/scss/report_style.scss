@@ -1,12 +1,6 @@
 @font-face {
-    font-family: 'avantbook';
-    src: url('/pfau/static/src/fonts/Avant_Garde_Book_BT_0.ttf') format('truetype'); // Safari, Android, iOS
-    font-weight: normal;
-}
-
-@font-face {
     font-family: 'avantdemi';
-    src: url('/pfau/static/src/fonts/Avant_Garde_Demi_BT_0.ttf') format('truetype'); // Safari, Android, iOS
+    src: url('/pfau/static/src/fonts/avantgarde.ttf') format('truetype'); // Safari, Android, iOS
     font-weight: normal;
 }
 .quotation-page{
