@@ -672,7 +672,8 @@
                                             <t t-set="product_des" t-value="line.name.split(']')[-1]  if ']' in line.name else line.name"/>
                                             <span t-esc="product_des.split(line.product_id.name)[0]"/>
                                             <br/>
-                                            <span t-esc="product_des.split(line.product_id.name)[1]"/>
+                                            <t t-set="isHave" t-value="product_des.split(line.product_id.name)"/>
+                                            <span t-if="len(isHave)>1" t-esc="product_des.split(line.product_id.name)[1]"/>
                                         </td>
                                         <td style="vertical-align: middle;">
                                             <img t-if="line.product_id.image_1920"
