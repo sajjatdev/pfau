@@ -672,8 +672,12 @@
                                             </strong>
                                         </td>
                                         <td style="vertical-align: top;">
-                                            <t t-set="product_des" t-value="line.name.split(']')[-1]  if ']' in line.name else line.name"/>
-                                            <span t-esc="product_des"/>
+                                            <t t-set="product_des" t-value="(line.name.split(']')[-1]).split(',') if ']' in line.name else line.name"/>
+                                            <t t-foreach="product_des" t-as="des">
+                                                 <span t-esc="product_des.des"/>
+                                                 <br/> 
+                                            </t>
+                                           
                                         </td>
                                         <td style="vertical-align: middle;">
                                             <img t-if="line.product_id.image_1920"
