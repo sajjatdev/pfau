@@ -669,13 +669,10 @@
                                             </strong>
                                         </td>
                                         <td style="vertical-align: top;">
-                                            <span t-esc="line.name.split(']')[-1]  if ']' in line.name else line.name"/>
+                                            <t t-set="product_des" t-value="line.name.split(']')[-1]  if ']' in line.name else line.name"/>
+                                            <span t-esc="product_des.split(line.product_id.name)[0]"/>
                                             <br/>
-                                            <t t-foreach="line.product_id.product_template_attribute_value_ids"
-                                                 t-as="attribute">
-                                                <span t-field="attribute.display_name"/>
-                                                <br/>
-                                            </t>
+                                            <span t-esc="product_des.split(line.product_id.name)[1]"/>
                                         </td>
                                         <td style="vertical-align: middle;">
                                             <img t-if="line.product_id.image_1920"
