@@ -604,10 +604,10 @@
                                 </strong>
                                     <p class="m-0" t-field="doc.invoice_date_due"/>
                                 </div>
-                                <div class="col-auto">
+                                <div t-if='doc.invoice_origin' class="col-auto">
                                     <strong t-translation="true">
-                                   Source
-                                </strong>
+                                        Source
+                                    </strong>
                                     <p class="m-0" t-field="doc.invoice_origin"/>
                                 </div>
                                 <div t-if="o.ref" class="col-auto">
