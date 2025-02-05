@@ -211,7 +211,7 @@
                                             </t>
                                             <t t-if="'P' in doc.name">
                                                 <br/>
-                                                <span t-field="line.name"/> 
+                                                <span t-field="line.name"/>
                                             </t>
                                             <br/>
                                             <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="attribute">
@@ -223,7 +223,8 @@
                                             <img t-if="line.product_id.image_1920" t-att-src="image_data_uri(line.product_id.image_1920)" width="50px" height="50px"/>
                                         </td>
                                         <td class="text-end" style="text-align: center; vertical-align: top;">
-                                            <span> <span t-field="line.price_unit"/> €</span>
+                                            <span>
+                                                <span t-field="line.price_unit"/> €</span>
                                         </td>
                                         <td class="text-end" style="vertical-align: top;">
                                             <t t-esc="int(line.product_uom_qty)"/>
@@ -477,10 +478,13 @@
                     <div class="footer">
                         <div class="text-center">
                             <p class="footer-size" t-translation="true">
-                            PFAU OG, COMPANY FOR OBJECT FURNISHING AND INTERIOR DESIGN, AM GESTADE 2-4, 1010 VIENNA<br/>
-                            <span class="footer-smallersize">PHONE: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA<br/>
-                            RAIFFEISENLANDESBANK NÖ-WIEN ACCOUNT NUM. 10.384.774, BANK CODE 32000, IBAN AT 8832 000 000 1038 4774, BIC RLNWATWW</span>
-                        </p>
+                            PFAU OG, COMPANY FOR OBJECT FURNISHING AND INTERIOR DESIGN, AM GESTADE 2-4, 1010 VIENNA
+                                <br/>
+                                <span class="footer-smallersize">PHONE: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA
+                                    <br/>
+                            RAIFFEISENLANDESBANK NÖ-WIEN ACCOUNT NUM. 10.384.774, BANK CODE 32000, IBAN AT 8832 000 000 1038 4774, BIC RLNWATWW
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -662,7 +666,6 @@
                                 <t t-set="index" t-value="index+1"/>
                                 <t t-if="line.display_type=='product'">
                                     <tr t-if="line.price_unit &gt;= 0" t-attf-style="#{''if index == len(doc.invoice_line_ids) else 'border-bottom: 0.5px solid black;'} ">
-                                        
                                         <td style="vertical-align: top;">
                                             <strong>
                                                 <span t-if="'position' in line" t-field="line.position"/>
@@ -670,10 +673,7 @@
                                         </td>
                                         <td style="vertical-align: top;">
                                             <t t-set="product_des" t-value="line.name.split(']')[-1]  if ']' in line.name else line.name"/>
-                                            <span t-esc="product_des.split(line.product_id.name)[0]"/>
-                                            <br/>
-                                            <t t-set="isHave" t-value="product_des.split(line.product_id.name)"/>
-                                            <span t-if="len(isHave)>1" t-esc="product_des.split(line.product_id.name)[1]"/>
+                                            <span t-esc="product_des"/>
                                         </td>
                                         <td style="vertical-align: middle;">
                                             <img t-if="line.product_id.image_1920"
@@ -681,7 +681,8 @@
                                          height="50px"/>
                                         </td>
                                         <td class="text-end" style="text-align: center; vertical-align: middle;">
-                                            <span> <span t-field="line.price_unit"/> €</span>
+                                            <span>
+                                                <span t-field="line.price_unit"/> €</span>
                                         </td>
                                         <td class="text-end" style="vertical-align: middle;">
                                             <t t-esc="int(line.quantity)"/>
@@ -799,10 +800,13 @@
                     <div class="footer">
                         <div class="text-center">
                             <p class="footer-size">
-                            PFAU OG, COMPANY FOR OBJECT FURNISHING AND INTERIOR DESIGN, AM GESTADE 2-4, 1010 VIENNA<br/>
-                            <span class="footer-smallersize">PHONE: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA<br/>
-                            RAIFFEISENLANDESBANK NÖ-WIEN ACCOUNT NUM. 10.384.774, BANK CODE 32000, IBAN AT 8832 000 000 1038 4774, BIC RLNWATWW</span>
-                        </p>
+                            PFAU OG, COMPANY FOR OBJECT FURNISHING AND INTERIOR DESIGN, AM GESTADE 2-4, 1010 VIENNA
+                                <br/>
+                                <span class="footer-smallersize">PHONE: +43 -1- 535 40 75, WWW.PFAU1010.COM, OFFICE@PFAU1010.COM, VAT-NO. ATU 10249006, FN 9447v HG VIENNA
+                                    <br/>
+                            RAIFFEISENLANDESBANK NÖ-WIEN ACCOUNT NUM. 10.384.774, BANK CODE 32000, IBAN AT 8832 000 000 1038 4774, BIC RLNWATWW
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>
