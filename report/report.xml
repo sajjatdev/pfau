@@ -713,8 +713,7 @@
                             </t>
                         </tbody>
                     </table>
-                    <br/>
-                    <br/>
+
                     <t t-set="discount"
                        t-value="sum(line.price_subtotal for line in doc.invoice_line_ids if line.price_subtotal and line.price_subtotal &lt; 0) or 0"/>
                     <t t-set="total_price"
