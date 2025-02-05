@@ -178,13 +178,13 @@
                                 <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                     <t t-translation="true">Price/Unit</t>
                                 </th>
-                                <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <th class="text-end" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                     <t t-translation="true">Quantity</t>
                                 </th>
-                                <th t-if="display_discount" class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <th t-if="display_discount" class="text-end" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                     <t t-translation="true">Disc.</t>
                                 </th>
-                                <th class="text-start" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
+                                <th class="text-end" style="border-top: 0px solid white !important; border-bottom: 1px solid black;">
                                     <t t-translation="true">Total</t>
                                 </th>
                             </tr>
