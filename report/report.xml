@@ -222,13 +222,13 @@
                                         <td style="vertical-align: top;">
                                             <img t-if="line.product_id.image_1920" t-att-src="image_data_uri(line.product_id.image_1920)" width="50px" height="50px"/>
                                         </td>
-                                        <td class="text-center" style="text-align: center; vertical-align: top;">
+                                        <td class="text-end" style="text-align: center; vertical-align: top;">
                                             <span> <span t-field="line.price_unit"/> €</span>
                                         </td>
-                                        <td class="text-center" style="vertical-align: top;">
+                                        <td class="text-end" style="vertical-align: top;">
                                             <t t-esc="int(line.product_uom_qty)"/>
                                         </td>
-                                        <td t-if="display_discount" class="text-center" style="vertical-align: top;">
+                                        <td t-if="display_discount" class="text-end" style="vertical-align: top;">
                                             <span t-field="line.discount"/>%
                                         </td>
                                         <td class="text-end" style="vertical-align: top;">
