@@ -7,3 +7,4 @@ class InheritAccountMove(models.Model):
         return _(
             " If the payment term is exceeded, 1.5% per month will be charged. The goods remain our property until full payment is received."
         )
+   

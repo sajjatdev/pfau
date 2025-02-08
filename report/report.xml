@@ -86,11 +86,11 @@
                                 <div class="col-6 text-start">
                                     <!-- Date based on state -->
                                     <span t-if="doc.state in ['draft','sent']">
-                                        <span t-field="doc.create_date" t-options="{'widget':'date'}"/>
+                                        <span t-field="doc.create_date" t-options="{'widget':'date','format': 'dd.MM.yyyy'}"/>
                                         <br/>
                                     </span>
                                     <span t-if="doc.state not in ['draft','sent']">
-                                        <span t-field="doc.date_order" t-options="{'widget':'date'}"/>
+                                        <span t-field="doc.date_order" t-options="{'widget':'date','format': 'dd.MM.yyyy'}"/>
                                         <br/>
                                     </span>
                                     <!-- User details -->
@@ -156,7 +156,7 @@
                                     <span t-translation="true">Order Date</span>
                                 </strong>
                                 <br/>
-                                <span t-field="doc.date_order" t-options="{'widget':'date'}"/>
+                                <span t-field="doc.date_order" t-options="{'widget':'date','format': 'dd.MM.yyyy'}"/>
                         </span>
                         </div>
                     </div>
@@ -389,7 +389,7 @@
                             <div class="col-9">
                                 <p t-translation="off">
                                 Das Angebot ist gültig bis
-                                    <t t-if="'validity_date' in doc and doc.validity_date" t-esc="doc.validity_date"/>
+                                    <t t-if="'validity_date' in doc and doc.validity_date" t-esc="doc.validity_date" t-options="{'widget':'date','format': 'dd.MM.yyyy'}" />
                                 </p>
                             </div>
                         </div>
@@ -581,10 +581,10 @@
                                 <!-- Left-aligned column -->
                                 <div class="col-6 text-start">
                                     <!-- Date based on state -->
-                                    <span t-field="doc.invoice_date" t-options="{'widget':'date'}"/>
+                                    <span t-field="doc.invoice_date" t-options="{'widget':'date','format': 'dd.MM.yyyy'}"/>
                                     <br/>
                                     <t t-if="doc.delivery_date">
-                                        <span t-field="doc.delivery_date" t-options="{'widget':'date'}"/>
+                                        <span t-field="doc.delivery_date" t-options="{'widget':'date','format': 'dd.MM.yyyy'}"/>
                                         <br/>
                                     </t>
                                     <span t-field="doc.user_id.name"/>
