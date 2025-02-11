@@ -40,7 +40,7 @@ msgstr ""
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "20% Tax."
-msgstr "20 % Steuer."
+msgstr "20 % MwSt."
 
 
 #. module: pfau
@@ -178,7 +178,7 @@ msgstr "Lieferadresse"
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Delivery Date"
-msgstr ""
+msgstr "Lieferdatum"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_form_view_pfau
@@ -303,7 +303,7 @@ msgstr "Rechnung"
 #: model:ir.model.fields,field_description:pfau.field_res_partner__is_vandor
 #: model:ir.model.fields,field_description:pfau.field_res_users__is_vandor
 msgid "Is Vandor"
-msgstr ""
+msgstr "Lieferant"
 
 #. module: pfau
 #: model:ir.model,name:pfau.model_account_move
@@ -354,7 +354,7 @@ msgstr ""
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "PURCHASE ORDER"
-msgstr "AUFTRAGSBESTÄTIGUNG"
+msgstr "BESTELLUNG"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
@@ -377,7 +377,7 @@ msgstr "Telefon"
 #: model:ir.model.fields,field_description:pfau.field_sale_order_line__position
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
@@ -478,7 +478,7 @@ msgstr ""
 #. module: pfau
 #: model_terms:ir.ui.view,arch_db:pfau.inherit_sale_quotations
 msgid "Subtotal"
-msgstr ""
+msgstr "Zwischensumme"
 
 #. module: pfau
 #: model:ir.model.fields,field_description:pfau.field_res_partner__supplier_discount
