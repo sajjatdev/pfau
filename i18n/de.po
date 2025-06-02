@@ -75,7 +75,7 @@ msgid ""
 msgstr ""
 "Alle Lieferungen unterliegen unseren Allgemeinen Geschäftsbedingungen, "
 "verfügbar unter agb.pfau1010.com. Wir hoffen, dass unser Angebot Ihren "
-"Erwartungen entspricht. Sie erreichen uns während unserer "
+"Erwartungen entspricht. Sie erreichen uns während unseren "
 "Geschäftszeiten unter 01 535 40 75 oder per E-Mail unter "
 "office@pfau1010.com."
 
